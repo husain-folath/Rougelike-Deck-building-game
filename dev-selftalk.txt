@@ -1,0 +1,30 @@
+roguelike deck builder game
+
+/*
+Game
+The game should be available in different difficulties such as (easy, normal, hard).
+Showcase how the difficulties change the gaming experience.
+The player can choice the difficulty of the AI
+Should have a button (How to play) to explain how to play.
+The difficulty may change the damage or cost or effect of a card.
+
+Card(s)
+I can use the cards as an array of objects. 
+Example: let Cards=[card1, card2, card3]
+Each card would usually consist of ID, name, cost, effect (which may be damage or healing or shielding), description, image.
+Example: let card={ID:1,name: ”Enchanting blood”,cost:3, effect: nextDamage*2, description:” doubles the next instance of damage.”,  img: “url”}
+Once the player loses, they should not be able to perform turn/actions
+Player
+The player will have a dynamic health bar. It should decrease as it receives damage and increase as it is healed
+The play will lose if their health becomes 0 or less.
+It should display a health of 0 at least
+
+PVE/ Enemy
+Enemies cards are cards possessed by the computer.
+Enemies might be created similarly to cards
+Enemies cards might have attributes ID, name, Deck, health,image
+Example: let enemies=[enemy1, enemy2, enemy3]
+Let Enemy={ID:1, name: ”John Cena”, Deck:[1,2,3], img: “url”}
+
+Most likely I will implement fundamentally simple enemy AI
+*/
