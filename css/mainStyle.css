@@ -3,7 +3,7 @@
 }
 
 body{
-     background-color: rgb(243, 34, 76);
+    background-color: rgb(243, 34, 76);
 }
 
 #upperBuffer{
@@ -58,4 +58,7 @@ padding: 5px 10px;
 #startBtn{
 color:white;
 background-color:navy;
+}
+#difficulties{
+    flex-wrap: wrap;
 }

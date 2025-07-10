@@ -1,3 +1,54 @@
-*{
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body{
     background-color: burlywood;
+}
+.card{
+    height: 200px;
+    width: 141px;
+    gap: 0;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.cardName{
+    box-sizing: border-box;
+    background-color: aqua;
+    width: 100%;   
+    height: 30px;
+    
+    
+}
+.cardImage{
+    background-color: blueviolet;
+    width: 100%;
+    height:100px;
+    
+}
+.cardCost{
+    background-color: chartreuse;
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    bottom: 0;
+    left:0;
+    
+}
+.cardDescription{
+    background-color: crimson;
+    height: 60px;
+    width: 100%;
+    overflow: hidden;
+    
+    
+}
+.cardMid{
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+    background-color: blueviolet;
+    height: 110px;
 }
