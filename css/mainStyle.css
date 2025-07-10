@@ -1,0 +1,61 @@
+*{
+    margin:0;
+}
+
+body{
+     background-color: rgb(243, 34, 76);
+}
+
+#upperBuffer{
+
+    height: 200px;
+}
+
+div{
+    display: flex;  
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+}
+
+button{
+border-radius: 15%;
+padding: 5px 10px;
+}
+
+#mainPagePanel{
+    border: 5px solid black;
+    margin: 0 auto;
+    width: 50%;
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+    border-radius: 15%;
+}
+
+#gameTitle{
+    background-color: aliceblue;
+    color: #a00a28;
+}
+
+#easyBtn{
+    color: beige;
+    background-color: green;
+}
+#normalBtn{
+    background-color: rgb(255, 191, 0);
+}
+#hardBtn{
+    background-color: red;
+}
+#howPlayBtn{
+    background-color: rgb(177, 177, 177);
+}
+#startBtn{
+color:white;
+background-color:navy;
+}
