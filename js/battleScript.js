@@ -1,4 +1,8 @@
 // const { createElement } = require("react");
+// import {getDifficulty} from "./mainScript.js"
+// let difficulty=getDifficulty()
+// console.log(difficulty)
+console.log(sessionStorage.getItem("difficulty"))
 
 const player =
 {
@@ -167,7 +171,7 @@ healthBarLabel.textContent=`${player.health}/${player.maxhealth}`
 updatehealthBar()
 
 function createPlayerdeck(){
-    for(i=0;i<player.deck.length;i++)
+    for(let i=0;i<player.deck.length;i++)
     {
         createCard(player.deck[i])
     }
