@@ -13,7 +13,14 @@ body{
     display: flex;
     flex-direction: column;
     position: relative;
+    margin: 20px auto;
+    border: 3px solid black;
 }
+.card>*{
+    border: 2px solid black;
+    
+}
+
 .cardName{
     box-sizing: border-box;
     background-color: aqua;
@@ -35,7 +42,7 @@ body{
     position: absolute;
     bottom: 0;
     left:0;
-    
+    border: 2px solid black;
 }
 .cardDescription{
     background-color: crimson;
@@ -52,7 +59,9 @@ body{
     background-color: blueviolet;
     height: 110px;
 }
-
+.cardId{
+    display: none;
+}
 #maxHealth{
     background-color: brown;
     width: 75%;

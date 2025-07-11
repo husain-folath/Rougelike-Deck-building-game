@@ -2,14 +2,103 @@
 
 const player =
 {
-    health:100,maxhealth:100,
+    health:100,maxhealth:100, deck:[1,7,2,3]
 }
 
 //list of available cards
-const cards =
-[
-{id:1,name: "Enchanting blood",cost:3, type:"Power", effect: "nextDamage*2", description:"doubles the next instance of damage.",  img: "url"}
-]
+const cards = [
+  {
+    id: 1,
+    name: "Enchanting blood",
+    cost: 3,
+    type: "Power",
+    effect: "nextDamage*2",
+    description: "Doubles the next instance of damage. Costs 3 health.",
+    img: "url"
+  },
+  {
+    id: 2,
+    name: "Flame Burst",
+    cost: 2,
+    type: "Attack",
+    effect: "deal 5 damage",
+    description: "Deals 5 damage to the enemy. Costs 2 health.",
+    img: "url"
+  },
+  {
+    id: 3,
+    name: "Stone Skin",
+    cost: 3,
+    type: "Defense",
+    effect: "gain 8 armor",
+    description: "Adds 8 armor to the player. Costs 3 health.",
+    img: "url"
+  },
+  {
+    id: 4,
+    name: "Mana Surge",
+    cost: 1,
+    type: "Power",
+    effect: "gain 2 energy next turn",
+    description: "Grants 2 extra energy next turn. Costs 1 health.",
+    img: "url"
+  },
+  {
+    id: 5,
+    name: "Shadow Step",
+    cost: 1,
+    type: "Skill",
+    effect: "dodge next attack",
+    description: "Evade the next attack completely. Costs 1 health.",
+    img: "url"
+  },
+  {
+    id: 6,
+    name: "Piercing Arrow",
+    cost: 2,
+    type: "Attack",
+    effect: "deal 4 damage, ignore armor",
+    description: "Deals 4 damage that ignores armor. Costs 2 health.",
+    img: "url"
+  },
+  {
+    id: 7,
+    name: "Healing Touch",
+    cost: 4,
+    type: "Skill",
+    effect: "restore 6 HP",
+    description: "Restores 6 health to the player. Costs 4 health to cast.",
+    img: "url"
+  },
+  {
+    id: 8,
+    name: "Blinding Light",
+    cost: 2,
+    type: "Skill",
+    effect: "enemy miss next turn",
+    description: "Blinds the enemy, causing them to miss their next turn. Costs 2 health.",
+    img: "url"
+  },
+  {
+    id: 9,
+    name: "Berserker Rage",
+    cost: 5,
+    type: "Power",
+    effect: "+4 damage, -2 defense",
+    description: "Gain +4 damage on all attacks but lose 2 defense. Costs 5 health.",
+    img: "url"
+  },
+  {
+    id: 10,
+    name: "Ice Shield",
+    cost: 3,
+    type: "Defense",
+    effect: "gain 5 armor, freeze attacker",
+    description: "Adds 5 armor and freezes the next enemy to hit you. Costs 3 health.",
+    img: "url"
+  }
+];
+
 
 
 //make the button send the player to the battle page
@@ -24,10 +113,14 @@ quitBtn.addEventListener("click", ()=>
 function createCard(cardId)
 {
     const newCardInfo=cards.find(card=>card.id===cardId)
-
+    
     const newCard= document.createElement("div")
     newCard.classList.add("card")
 
+    const newCardId= document.createElement("p")
+    newCardId.classList.add("cardId")
+    newCardId.textContent=newCardInfo.id
+    
     const newCardName=document.createElement("div")
     newCardName.classList.add("cardName")
     newCardName.textContent=newCardInfo.name
@@ -49,14 +142,16 @@ function createCard(cardId)
 
     newCardMid.append(newCardCost,newCardImage)
 
-    newCard.append(newCardName,newCardMid,newCardDescription)
+    newCard.append(newCardId,newCardName,newCardMid,newCardDescription)
 
-    document.body.appendChild(newCard)
+    const cardsBelt = document.getElementById("cardsBelt")
+    cardsBelt.appendChild(newCard)
+    // document.body.appendChild(newCard)
 
     // console.log(newCard)
 }
 
-createCard(1)
+
 
 function updatehealthBar()
 {
@@ -70,3 +165,36 @@ healthBarLabel.textContent=`${player.health}/${player.maxhealth}`
 // const maxHealthBar= document.getElementById("maxHealth")
 // console.log(maxHealthBar)
 updatehealthBar()
+
+function createPlayerdeck(){
+    for(i=0;i<player.deck.length;i++)
+    {
+        createCard(player.deck[i])
+    }
+
+}
+createPlayerdeck()
+const playerCardsElement=document.querySelectorAll(".card")
+
+playerCardsElement.forEach(card=>{
+    card.addEventListener('click',event=>{
+        let cardElement=null
+        if(!event.target.classList.contains("card")){
+            cardElement =event.target.parentElement;
+            while(cardElement.classList.contains("card")!==true)
+            {
+                
+                cardElement =cardElement.parentElement;
+                
+            }
+        }
+        else{
+            cardElement=event.target
+        }
+        console.log(event.target)
+        console.log(cardElement)
+        let cardId=Number(cardElement.querySelector(".cardId").textContent)
+        const card =cards.find(card=>card.id===cardId)
+        console.log(card)
+    })
+})
