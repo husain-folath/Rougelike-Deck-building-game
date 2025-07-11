@@ -1,11 +1,17 @@
 // const { createElement } = require("react");
 
+const player =
+{
+    health:100,maxhealth:100,
+}
+
 //list of available cards
 const cards =
 [
 {id:1,name: "Enchanting blood",cost:3, type:"Power", effect: "nextDamage*2", description:"doubles the next instance of damage.",  img: "url"}
 ]
-console.log("Bye!")
+
+
 //make the button send the player to the battle page
 const quitBtn= document.getElementById("quitBtn");
 quitBtn.addEventListener("click", ()=>
@@ -13,9 +19,10 @@ quitBtn.addEventListener("click", ()=>
     window.location.href="index.html";
 })
 
-console.log(cards)
- function createCard(cardId)
- {
+
+// console.log(cards)
+function createCard(cardId)
+{
     const newCardInfo=cards.find(card=>card.id===cardId)
 
     const newCard= document.createElement("div")
@@ -47,5 +54,19 @@ console.log(cards)
     document.body.appendChild(newCard)
 
     // console.log(newCard)
- }
- createCard(1)
+}
+
+createCard(1)
+
+function updatehealthBar()
+{
+ const healthBar =document.getElementById("currentHealth")
+ healthBar.style.width=`${(player.health/player.maxhealth)*100}%`
+ 
+const healthBarLabel= document.getElementById("health")
+healthBarLabel.textContent=`${player.health}/${player.maxhealth}`
+
+}
+// const maxHealthBar= document.getElementById("maxHealth")
+// console.log(maxHealthBar)
+updatehealthBar()
