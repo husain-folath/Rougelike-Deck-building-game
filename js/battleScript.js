@@ -3,10 +3,11 @@
 // let difficulty=getDifficulty()
 // console.log(difficulty)
 console.log(sessionStorage.getItem("difficulty"))
+const difficulty=sessionStorage.getItem("difficulty")
 
 const player =
 {
-    health:100,maxhealth:100, deck:[1,7,2,3]
+    health:40,maxHealth:40, deck:[1,7,2,3]
 }
 
 //list of available cards
@@ -16,8 +17,8 @@ const cards = [
     name: "Enchanting blood",
     cost: 3,
     type: "Power",
-    effect: "nextDamage*2",
-    description: "Doubles the next instance of damage. Costs 3 health.",
+    powerup: 2,
+    description: "Doubles the next instance of damage.",
     img: "url"
   },
   {
@@ -25,8 +26,8 @@ const cards = [
     name: "Flame Burst",
     cost: 2,
     type: "Attack",
-    effect: "deal 5 damage",
-    description: "Deals 5 damage to the enemy. Costs 2 health.",
+    damage: 5,
+    description: "Deals 5 damage to the enemy.",
     img: "url"
   },
   {
@@ -34,17 +35,17 @@ const cards = [
     name: "Stone Skin",
     cost: 3,
     type: "Defense",
-    effect: "gain 8 armor",
-    description: "Adds 8 armor to the player. Costs 3 health.",
+    shield: 8,
+    description: "Adds 8 armor to the player.",
     img: "url"
   },
   {
     id: 4,
-    name: "Mana Surge",
+    name: "Adrenaline Rush",
     cost: 1,
     type: "Power",
-    effect: "gain 2 energy next turn",
-    description: "Grants 2 extra energy next turn. Costs 1 health.",
+    draw:2,
+    description: "Draw 2 additional cards.",
     img: "url"
   },
   {
@@ -52,8 +53,8 @@ const cards = [
     name: "Shadow Step",
     cost: 1,
     type: "Skill",
-    effect: "dodge next attack",
-    description: "Evade the next attack completely. Costs 1 health.",
+    dodge:1,
+    description: "Evade the next attack completely.",
     img: "url"
   },
   {
@@ -61,8 +62,8 @@ const cards = [
     name: "Piercing Arrow",
     cost: 2,
     type: "Attack",
-    effect: "deal 4 damage, ignore armor",
-    description: "Deals 4 damage that ignores armor. Costs 2 health.",
+    damage:4,
+    description: "Deals 4 damage that ignores armor.",
     img: "url"
   },
   {
@@ -70,8 +71,8 @@ const cards = [
     name: "Healing Touch",
     cost: 4,
     type: "Skill",
-    effect: "restore 6 HP",
-    description: "Restores 6 health to the player. Costs 4 health to cast.",
+    heal: 6,
+    description: "Restores 6 health to the player.",
     img: "url"
   },
   {
@@ -79,8 +80,8 @@ const cards = [
     name: "Blinding Light",
     cost: 2,
     type: "Skill",
-    effect: "enemy miss next turn",
-    description: "Blinds the enemy, causing them to miss their next turn. Costs 2 health.",
+    blind:1,
+    description: "Blinds the enemy, causing them to miss their next turn.",
     img: "url"
   },
   {
@@ -88,8 +89,8 @@ const cards = [
     name: "Berserker Rage",
     cost: 5,
     type: "Power",
-    effect: "+4 damage, -2 defense",
-    description: "Gain +4 damage on all attacks but lose 2 defense. Costs 5 health.",
+    adddamage:4,
+    description: "Gain +4 damage on all attacks.",
     img: "url"
   },
   {
@@ -97,18 +98,28 @@ const cards = [
     name: "Ice Shield",
     cost: 3,
     type: "Defense",
-    effect: "gain 5 armor, freeze attacker",
-    description: "Adds 5 armor and freezes the next enemy to hit you. Costs 3 health.",
+    shield:5,
+    freeze:1,
+    description: "Adds 5 armor and freezes the next enemy to hit you.",
     img: "url"
   }
 ];
 
 
+function init(){
+    player.maxHealth-=10*difficulty
+    player.health=player.maxHealth
+    updatehealthBar()
+    createPlayerdeck()
+}
+
+init()
+
 
 //make the button send the player to the battle page
 const quitBtn= document.getElementById("quitBtn");
 quitBtn.addEventListener("click", ()=>
-{
+    {
     window.location.href="index.html";
 })
 
@@ -159,16 +170,18 @@ function createCard(cardId)
 
 function updatehealthBar()
 {
+    if(player.health>player.maxHealth) player.health=player.maxHealth
+    if(player.health<0) player.health=0
  const healthBar =document.getElementById("currentHealth")
- healthBar.style.width=`${(player.health/player.maxhealth)*100}%`
+ healthBar.style.width=`${(player.health/player.maxHealth)*100}%`
  
 const healthBarLabel= document.getElementById("health")
-healthBarLabel.textContent=`${player.health}/${player.maxhealth}`
+healthBarLabel.textContent=`${player.health}/${player.maxHealth}`
 
 }
 // const maxHealthBar= document.getElementById("maxHealth")
 // console.log(maxHealthBar)
-updatehealthBar()
+
 
 function createPlayerdeck(){
     for(let i=0;i<player.deck.length;i++)
@@ -177,28 +190,44 @@ function createPlayerdeck(){
     }
 
 }
-createPlayerdeck()
+
 const playerCardsElement=document.querySelectorAll(".card")
 
-playerCardsElement.forEach(card=>{
-    card.addEventListener('click',event=>{
-        let cardElement=null
-        if(!event.target.classList.contains("card")){
+playerCardsElement.forEach(card=>
+{
+    card.addEventListener('click',handleClick)
+})
+
+function handleClick (event) {
+       let cardElement=null
+        //to target the whole card div
+        if(!event.target.classList.contains("card"))
+        {
             cardElement =event.target.parentElement;
+            
             while(cardElement.classList.contains("card")!==true)
             {
-                
                 cardElement =cardElement.parentElement;
-                
             }
         }
-        else{
+        else
+        {
             cardElement=event.target
         }
-        console.log(event.target)
-        console.log(cardElement)
+
         let cardId=Number(cardElement.querySelector(".cardId").textContent)
         const card =cards.find(card=>card.id===cardId)
+        if("damage" in card)
+        {
+            console.log(`you dealt ${card.damage} damage!!`)
+        }
+        if("heal" in card)
+        {
+            console.log(`you healed ${card.heal} Health!!`)
+            player.health+=card.heal
+        }
+        player.health-=(card.cost)
+        updatehealthBar()
+        cardElement.remove()
         console.log(card)
-    })
-})
+}
