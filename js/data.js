@@ -1,5 +1,6 @@
 //list of available cards
-const cards = [
+const cards = 
+[
   {
     id: 1,
     name: "Enchanting blood",
@@ -93,7 +94,8 @@ const cards = [
   }
 ];
 
-const enemies = [
+const enemies = 
+[
   {
     id: 1,
     name: "Goblin Raider",
