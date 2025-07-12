@@ -1,7 +1,4 @@
-// const { createElement } = require("react");
-// import {getDifficulty} from "./mainScript.js"
-// let difficulty=getDifficulty()
-// console.log(difficulty)
+import {cards , enemies} from './data.js'
 console.log(sessionStorage.getItem("difficulty"))
 const difficulty=sessionStorage.getItem("difficulty")
 
@@ -10,100 +7,6 @@ const player =
     health:40,maxHealth:40, deck:[1,7,2,3]
 }
 
-//list of available cards
-const cards = [
-  {
-    id: 1,
-    name: "Enchanting blood",
-    cost: 3,
-    type: "Power",
-    powerup: 2,
-    description: "Doubles the next instance of damage.",
-    img: "url"
-  },
-  {
-    id: 2,
-    name: "Flame Burst",
-    cost: 2,
-    type: "Attack",
-    damage: 5,
-    description: "Deals 5 damage to the enemy.",
-    img: "url"
-  },
-  {
-    id: 3,
-    name: "Stone Skin",
-    cost: 3,
-    type: "Defense",
-    shield: 8,
-    description: "Adds 8 armor to the player.",
-    img: "url"
-  },
-  {
-    id: 4,
-    name: "Adrenaline Rush",
-    cost: 1,
-    type: "Power",
-    draw:2,
-    description: "Draw 2 additional cards.",
-    img: "url"
-  },
-  {
-    id: 5,
-    name: "Shadow Step",
-    cost: 1,
-    type: "Skill",
-    dodge:1,
-    description: "Evade the next attack completely.",
-    img: "url"
-  },
-  {
-    id: 6,
-    name: "Piercing Arrow",
-    cost: 2,
-    type: "Attack",
-    damage:4,
-    description: "Deals 4 damage that ignores armor.",
-    img: "url"
-  },
-  {
-    id: 7,
-    name: "Healing Touch",
-    cost: 4,
-    type: "Skill",
-    heal: 6,
-    description: "Restores 6 health to the player.",
-    img: "url"
-  },
-  {
-    id: 8,
-    name: "Blinding Light",
-    cost: 2,
-    type: "Skill",
-    blind:1,
-    description: "Blinds the enemy, causing them to miss their next turn.",
-    img: "url"
-  },
-  {
-    id: 9,
-    name: "Berserker Rage",
-    cost: 5,
-    type: "Power",
-    adddamage:4,
-    description: "Gain +4 damage on all attacks.",
-    img: "url"
-  },
-  {
-    id: 10,
-    name: "Ice Shield",
-    cost: 3,
-    type: "Defense",
-    shield:5,
-    freeze:1,
-    description: "Adds 5 armor and freezes the next enemy to hit you.",
-    img: "url"
-  }
-];
 
 
 function init(){
@@ -111,6 +14,7 @@ function init(){
     player.health=player.maxHealth
     updatehealthBar()
     createPlayerdeck()
+    createEnemy(1)
 }
 
 init()
@@ -165,7 +69,52 @@ function createCard(cardId)
 
     // console.log(newCard)
 }
+function createEnemy(enemyId)
+{
+    const newEnemyInfo=enemies.find(enemy=>enemy.id===enemyId)
+    
+    const newEnemy= document.createElement("div")
+    newEnemy.classList.add("enemy")
 
+    const newEnemyId= document.createElement("p")
+    newEnemyId.classList.add("enemyId")
+    newEnemyId.textContent=newEnemyInfo.id
+    
+    const newEnemyName=document.createElement("div")
+    newEnemyName.classList.add("enemyName")
+    newEnemyName.textContent=newEnemyInfo.name
+
+    const newEnemyImage=document.createElement("div")
+    newEnemyImage.classList.add("enemyImage")
+    newEnemyImage.textContent=newEnemyInfo.image
+
+    const newEnemyAction=document.createElement("div")
+    newEnemyAction.classList.add("enemyAction")
+    newEnemyAction.textContent="5 🗡️"
+
+    const newEnemyMaxHealth=document.createElement("div")
+    newEnemyMaxHealth.classList.add("enemyMaxHealth")
+
+    const newEnemyHealth=document.createElement("p")
+    newEnemyHealth.classList.add("enemyHealth")
+    newEnemyHealth.textContent=`${player.health}/${player.maxHealth}`
+
+    const newEnemyCurrentHealth=document.createElement("div")
+    newEnemyCurrentHealth.classList.add("enemyCurrentHealth")
+    newEnemyCurrentHealth.style.width=`${(newEnemyInfo.health/newEnemyInfo.maxHealth)*100}%`
+ 
+
+    newEnemyMaxHealth.append(newEnemyCurrentHealth,newEnemyHealth)
+
+    newEnemy.append(newEnemyId,newEnemyName,newEnemyImage,newEnemyMaxHealth,newEnemyAction)
+
+    const enemiesBelt = document.getElementById("enemiesbelt")
+    enemiesBelt.appendChild(newEnemy)
+    
+    // document.body.appendChild(newCard)
+
+    // console.log(newCard)
+}
 
 
 function updatehealthBar()

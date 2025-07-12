@@ -6,7 +6,7 @@
 body{
     background-color: burlywood;
 }
-.card{
+.card,.enemy{
     height: 200px;
     width: 141px;
     gap: 0;
@@ -16,12 +16,12 @@ body{
     margin: 20px auto;
     border: 3px solid black;
 }
-.card>*{
+.card>*,.enemy>*{
     border: 2px solid black;
     
 }
 
-.cardName{
+.cardName, .enemyName{
     box-sizing: border-box;
     background-color: aqua;
     width: 100%;   
@@ -32,8 +32,7 @@ body{
 .cardImage{
     background-color: blueviolet;
     width: 100%;
-    height:100px;
-    
+    height:100px; 
 }
 .cardCost{
     background-color: chartreuse;
@@ -52,16 +51,53 @@ body{
     
     
 }
+.enemyImage{
+    background-color: blueviolet;
+    width: 100%;
+    height:140px;
+    
+}
+.enemyCurrentHealth
+{
+    background-color: red;  
+    width: 50%;
+    height: 30px; 
+}
+.enemyMaxHealth{
+    background-color: brown;
+    height: 30px;
+    width: 100%;
+    overflow: hidden;   
+    justify-content: left;
+    position: relative;
+}
+.enemyHealth{
+    position: fixed;
+    margin-left:10px;
+}
+.enemyAction{
+    background-color: crimson;
+    position: absolute;
+    top: 20px;
+    right: -55px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+}
 .cardMid{
     box-sizing: border-box;
     position: relative;
     width: 100%;
     background-color: blueviolet;
     height: 110px;
+    overflow: hidden;
 }
-.cardId{
+.cardId,.enemyId{
     display: none;
 }
+
 #maxHealth{
     background-color: brown;
     width: 75%;

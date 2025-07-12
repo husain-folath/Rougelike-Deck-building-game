@@ -56,6 +56,6 @@ startBtn.addEventListener("click", ()=>
     // else if (clickedBtn.classList.contains("hardBtn")) difficulty=1;
     // else difficulty=0;
     
-export function getDifficulty(){
-    return difficulty
-}
+// export function getDifficulty(){
+//     return difficulty
+// }
