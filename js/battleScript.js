@@ -8,7 +8,7 @@ const currentEnemies=[]
 
 const player =
 {
-  health:40,maxHealth:40,shield:0,maxShield:0, deck:[], unusedDeck:[1,1,2,2,7,7,3,4,5,6,8,9], usedDeck:[],
+  health:40,maxHealth:40,shield:0,maxShield:0, deck:[], unusedDeck:[2,2,2,2,7,7,7,7,7,6,6,6], usedDeck:[],
 }
 
 
@@ -203,7 +203,7 @@ function updateShieldBar()
   }
   const shieldBarLabel= document.getElementById("shield")
   // shieldBarLabel.style.display=""
-  console.log(shieldBarLabel)
+  // console.log(shieldBarLabel)
 
   shieldBarLabel.textContent=`${player.shield}/${player.maxShield}`
 }
@@ -247,7 +247,7 @@ function createPlayerdeck() {
       console.error("Selected card is undefined", index, player.unusedDeck);
       continue;
     }
-    console.log(card)
+    // console.log(card)
     
     createCard(card);              // render/prepare card
     player.deck.push(card);       // add to active deck
@@ -342,9 +342,9 @@ function handleClick (event)
           //  playerCardsElement=[...document.getElementsByClassName("card")]
           removeSelectedCard()
           // selectedCard.remove()
-          console.log('player.unusedDeck',player.unusedDeck)
-          console.log('player.usedDeck',player.usedDeck)
-          console.log('player.deck',player.deck)
+          // console.log('player.unusedDeck',player.unusedDeck)
+          // console.log('player.usedDeck',player.usedDeck)
+          // console.log('player.deck',player.deck)
         }
       }
       else
@@ -374,7 +374,7 @@ function handleClick (event)
       {
         enemyElement=event.target
       }
-      console.log(enemyElement)
+      // console.log(enemyElement)
         // console.log(playerCardsElement)
       if(checkSelectedCard())
       {
@@ -407,9 +407,9 @@ function handleClick (event)
           }
           enemiesElement= document.querySelectorAll(".enemy")
 
-          console.log('player.unusedDeck',player.unusedDeck)
-          console.log('player.usedDeck',player.usedDeck)
-          console.log('player.deck',player.deck)
+          // console.log('player.unusedDeck',player.unusedDeck)
+          // console.log('player.usedDeck',player.usedDeck)
+          // console.log('player.deck',player.deck)
           // console.log(enemiesElement)
           // console.log(enemyIndex)
           // console.log(currentEnemies)
@@ -467,12 +467,28 @@ function endTurn()
   if(gameState==="battle")
   {
     turn="enemy"
+    currentEnemies.forEach(enemy=>
+    {
+      // console.log(enemy.deck.length)
+      let enemyMoveIdx=Math.floor(Math.random()*enemy.deck.length)
+      let enemyMoveId=enemy.deck[enemyMoveIdx]
+      let enemyMove=cards.find(card=>card.id===enemyMoveId)
+      if("damage" in enemyMove)
+      {
+        player.health-=enemyMove.damage
+      }
+      console.log(enemy.name,"enemy used",enemyMove)
+    }
+    )
     createPlayerdeck()
     
-    console.log(turn)
+    // console.log(turn)
     turn="player"
-    console.log(turn)
+    // console.log(turn)
   }
+
+  updatePlayerBars()
+
 }
 
 function checkGameState()
