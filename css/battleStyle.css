@@ -72,7 +72,7 @@ body{
     position: relative;
 }
 .enemyHealth{
-    position: fixed;
+    position: absolute;
     margin-left:10px;
 }
 .enemyAction{
@@ -114,7 +114,7 @@ body{
     height: 30px;
 }
 #health{
-    position: fixed;
+    position: absolute;
     margin-left:10px;
 }
 .selected{

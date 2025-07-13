@@ -99,8 +99,8 @@ const enemies =
   {
     id: 1,
     name: "Goblin Raider",
-    maxHealth: 100,
-    health: 100,
+    maxHealth: 10,
+    health: 10,
     temper: "aggressive",
     deck: [1, 2, 5],
     image: "url"
@@ -108,8 +108,8 @@ const enemies =
   {
     id: 2,
     name: "Cave Troll",
-    maxHealth: 200,
-    health: 200,
+    maxHealth: 20,
+    health: 20,
     temper: "defensive",
     deck: [3, 4, 6],
     image: "url"
@@ -117,8 +117,8 @@ const enemies =
   {
     id: 3,
     name: "Skeleton Archer",
-    maxHealth: 80,
-    health: 80,
+    maxHealth: 8,
+    health: 8,
     temper: "aggressive",
     deck: [1, 7, 8],
     image: "url"
@@ -126,8 +126,8 @@ const enemies =
   {
     id: 4,
     name: "Dark Mage",
-    maxHealth: 120,
-    health: 120,
+    maxHealth: 12,
+    health: 12,
     temper: "defensive",
     deck: [9, 10, 2],
     image: "url"
@@ -135,8 +135,8 @@ const enemies =
   {
     id: 5,
     name: "Orc Warrior",
-    maxHealth: 150,
-    health: 150,
+    maxHealth: 15,
+    health: 15,
     temper: "aggressive",
     deck: [2, 5, 7],
     image: "url"
@@ -144,8 +144,8 @@ const enemies =
   {
     id: 6,
     name: "Bandit Leader",
-    maxHealth: 130,
-    health: 130,
+    maxHealth: 13,
+    health: 13,
     temper: "aggressive",
     deck: [1, 3, 8],
     image: "url"
@@ -153,8 +153,8 @@ const enemies =
   {
     id: 7,
     name: "Stone Golem",
-    maxHealth: 250,
-    health: 250,
+    maxHealth: 25,
+    health: 25,
     temper: "defensive",
     deck: [4, 6, 9],
     image: "url"
@@ -162,8 +162,8 @@ const enemies =
   {
     id: 8,
     name: "Vampire",
-    maxHealth: 110,
-    health: 110,
+    maxHealth: 11,
+    health: 11,
     temper: "aggressive",
     deck: [7, 10, 1],
     image: "url"
@@ -171,8 +171,8 @@ const enemies =
   {
     id: 9,
     name: "Necromancer",
-    maxHealth: 140,
-    health: 140,
+    maxHealth: 14,
+    health: 14,
     temper: "defensive",
     deck: [3, 9, 5],
     image: "url"
@@ -180,8 +180,8 @@ const enemies =
   {
     id: 10,
     name: "Fire Elemental",
-    maxHealth: 160,
-    health: 160,
+    maxHealth: 16,
+    health: 16,
     temper: "aggressive",
     deck: [4, 6, 10],
     image: "url"

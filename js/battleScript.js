@@ -8,19 +8,21 @@ const currentEnemies=[]
 
 const player =
 {
-  health:40,maxHealth:40, deck:[1,7,2,3],shield:0,maxShiled:0,
+  health:40,maxHealth:40,shield:0,maxShiled:0, deck:[], unusedDeck:[7,2,3,6,2], usedDeck:[],
 }
 
 
 
 /*-------------------------------- Variables --------------------------------*/
 let playerCardsElement=[]
-
+let turn
 
 
 
 /*------------------------ Cached Element References ------------------------*/
 const quitBtn= document.getElementById("quitBtn");
+// const shuffleDeckBtn= document.getElementById("shuffleDeckBtn");
+const endTurnDeckBtn= document.getElementById("endTurnDeckBtn");
 let enemiesElement=document.querySelectorAll(".enemy")
 
 
@@ -32,6 +34,9 @@ quitBtn.addEventListener("click", ()=>
   {
     window.location.href="index.html";
   })
+
+  // shuffleDeckBtn.addEventListener("click", createPlayerdeck)
+  endTurnDeckBtn.addEventListener("click", endTurn)
   
 
   
@@ -48,6 +53,7 @@ function init(){
   createEnemyTeam()
   attachCardEventListeners() 
   attachEnemyEventListeners()
+  turn="player"
 }
 
 function attachCardEventListeners() 
@@ -174,13 +180,48 @@ function updatehealthBar()
 // const maxHealthBar= document.getElementById("maxHealth")
 // console.log(maxHealthBar)
 
-function createPlayerdeck()
-{
-  for(let i=0;i<player.deck.length;i++)
-  {
-    createCard(player.deck[i])
+function createPlayerdeck() {
+  // Move all current deck cards to usedDeck
+  for (let i = 0; i < player.deck.length; i++) {
+    player.usedDeck.push(player.deck[i]);
   }
+  player.deck = [];
+  removeAllCards()
+  for (let i = 0; i < 4; i++) {
+    // Refill unusedDeck if it's empty
+    if (player.unusedDeck.length === 0) {
+      console.log("Refilling unusedDeck from usedDeck");
+      player.unusedDeck = player.usedDeck;
+      player.usedDeck = [];
+    }
+
+    // Update length AFTER possible refill
+    let unusedDeckLength = player.unusedDeck.length;
+
+    // Avoid trying to get a card if unusedDeck is still empty
+    if (unusedDeckLength === 0) {
+      console.warn("No cards left to draw!");
+      break;
+    }
+
+    let index = Math.floor(Math.random() * unusedDeckLength);
+    let card = player.unusedDeck[index];
+   
+
+    if (!card) {
+      console.error("Selected card is undefined", index, player.unusedDeck);
+      continue;
+    }
+    console.log(card)
+    
+    createCard(card);              // render/prepare card
+    player.deck.push(card);       // add to active deck
+    player.unusedDeck.splice(index, 1); // remove from unused
+  }
+  attachCardEventListeners() 
 }
+
+
   
   
 
@@ -257,13 +298,18 @@ function handleClick (event)
             
           console.log(`powered up`)
         }
-
+        const selectedCardIndex = Array.from(selectedCard.parentElement.children).indexOf(selectedCard);
+        player.usedDeck.push(card.id)
+        player.deck.splice(selectedCardIndex,1)
         player.health-=(card.cost)
         updatehealthBar()
 
         //  playerCardsElement=[...document.getElementsByClassName("card")]
         removeSelectedCard()
-        selectedCard.remove()
+        // selectedCard.remove()
+        console.log('player.unusedDeck',player.unusedDeck)
+        console.log('player.usedDeck',player.usedDeck)
+        console.log('player.deck',player.deck)
       }
     }
     else
@@ -305,6 +351,9 @@ function handleClick (event)
 
       if("damage" in card)
       { 
+        const selectedCardIndex = Array.from(selectedCard.parentElement.children).indexOf(selectedCard);
+        player.usedDeck.push(card.id)
+        player.deck.splice(selectedCardIndex,1)
         // console.log(`you dealt ${card.damage} damage!!`)
         player.health-=(card.cost)
         updatehealthBar()
@@ -315,16 +364,20 @@ function handleClick (event)
         currentEnemies[enemyIndex].health-=card.damage
         enemyElement.querySelector(".enemyCurrentHealth").style.width=`${(currentEnemies[enemyIndex].health/currentEnemies[enemyIndex].maxHealth)*100}%`
         enemyElement.querySelector(".enemyHealth").textContent=`${currentEnemies[enemyIndex].health}/${currentEnemies[enemyIndex].maxHealth}`
-        if(currentEnemies[enemyIndex].health<0)
+        if(currentEnemies[enemyIndex].health<=0)
         {
           enemyElement.remove()
           currentEnemies.splice(enemyIndex,1)
 
         }
         enemiesElement= document.querySelectorAll(".enemy")
-        console.log(enemiesElement)
-        console.log(enemyIndex)
-        console.log(currentEnemies)
+
+        console.log('player.unusedDeck',player.unusedDeck)
+        console.log('player.usedDeck',player.usedDeck)
+        console.log('player.deck',player.deck)
+        // console.log(enemiesElement)
+        // console.log(enemyIndex)
+        // console.log(currentEnemies)
         // console.log(card)
         // console.log("Attacked an enemy")
 
@@ -365,6 +418,22 @@ function getSelectedCard()
   return selectedCard
 }
 
+function removeAllCards()
+{
+  playerCardsElement = [...document.getElementsByClassName("card")];
+  
+  playerCardsElement.forEach(card=> card.remove())
+}
+
+function endTurn()
+{
+  turn="enemy"
+  createPlayerdeck()
+  
+  console.log(turn)
+  turn="player"
+  console.log(turn)
+}
 
 init()
 // function handleClick2 (event){
