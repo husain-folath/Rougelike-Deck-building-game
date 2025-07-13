@@ -8,7 +8,7 @@ const currentEnemies=[]
 
 const player =
 {
-  health:40,maxHealth:40,shield:0,maxShiled:0, deck:[], unusedDeck:[1,1,2,2,7,7,3,4,5,6,8,9], usedDeck:[],
+  health:40,maxHealth:40,shield:0,maxShield:0, deck:[], unusedDeck:[1,1,2,2,7,7,3,4,5,6,8,9], usedDeck:[],
 }
 
 
@@ -49,10 +49,11 @@ function init(){
   player.maxHealth-=10*difficulty
   player.health=player.maxHealth
   gameState="battle"
-  updatehealthBar()
+  updatePlayerBars()
   createPlayerdeck()
   createEnemyTeam()
   turn="player"
+  
 }
 
 function attachCardEventListeners() 
@@ -154,7 +155,7 @@ function createEnemy(enemyId)
 
   newEnemy.append(newEnemyId,newEnemyName,newEnemyImage,newEnemyMaxHealth,newEnemyAction)
 
-  const enemiesBelt = document.getElementById("enemiesbelt")
+  const enemiesBelt = document.getElementById("enemiesBelt")
   enemiesBelt.appendChild(newEnemy)
     
   // document.body.appendChild(newCard)
@@ -180,6 +181,36 @@ function updatehealthBar()
   const healthBarLabel= document.getElementById("health")
   healthBarLabel.textContent=`${player.health}/${player.maxHealth}`
 
+}
+
+function updateShieldBar()
+{
+  if(player.shield>player.maxShield) player.maxShield=player.shield
+  
+  const shieldBar =document.getElementById("currentShield")
+  const maxShieldBar =document.getElementById("maxShield")
+
+  if(player.shield<=0) 
+  {
+    maxShieldBar.style.display="none"
+    player.shield=0
+    player.maxShield=0
+  }
+  else
+  {
+    maxShieldBar.style.display="block"
+    shieldBar.style.width=`${(player.shield/player.maxShield)*100}%`
+  }
+  const shieldBarLabel= document.getElementById("shield")
+  // shieldBarLabel.style.display=""
+  console.log(shieldBarLabel)
+
+  shieldBarLabel.textContent=`${player.shield}/${player.maxShield}`
+}
+function updatePlayerBars()
+{
+  updateShieldBar()
+  updatehealthBar()
 }
 // const maxHealthBar= document.getElementById("maxHealth")
 // console.log(maxHealthBar)
@@ -251,7 +282,7 @@ function createEnemyTeam()
 
 
 function handleClick (event) 
-{ if(gameState==="battle")
+{ if(gameState==="battle" && turn==="player")
   {
     playerCardsElement = [...document.getElementsByClassName("card")];
 
@@ -307,8 +338,7 @@ function handleClick (event)
           player.usedDeck.push(card.id)
           player.deck.splice(selectedCardIndex,1)
           player.health-=(card.cost)
-          updatehealthBar()
-
+          updatePlayerBars()
           //  playerCardsElement=[...document.getElementsByClassName("card")]
           removeSelectedCard()
           // selectedCard.remove()
@@ -361,7 +391,7 @@ function handleClick (event)
           player.deck.splice(selectedCardIndex,1)
           // console.log(`you dealt ${card.damage} damage!!`)
           player.health-=(card.cost)
-          updatehealthBar()
+          updatePlayerBars()
           //  playerCardsElement=[...document.getElementsByClassName("card")]
           removeSelectedCard()
           // selectedCard.remove()
