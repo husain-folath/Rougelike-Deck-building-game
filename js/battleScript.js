@@ -8,7 +8,7 @@ const currentEnemies=[]
 
 const player =
 {
-  health:40,maxHealth:40,shield:0,maxShiled:0, deck:[], unusedDeck:[7,2,3,6,2], usedDeck:[],
+  health:40,maxHealth:40,shield:0,maxShiled:0, deck:[], unusedDeck:[1,1,2,2,7,7,3,4,5,6,8,9], usedDeck:[],
 }
 
 
@@ -16,7 +16,7 @@ const player =
 /*-------------------------------- Variables --------------------------------*/
 let playerCardsElement=[]
 let turn
-
+let gameState
 
 
 /*------------------------ Cached Element References ------------------------*/
@@ -48,11 +48,10 @@ quitBtn.addEventListener("click", ()=>
 function init(){
   player.maxHealth-=10*difficulty
   player.health=player.maxHealth
+  gameState="battle"
   updatehealthBar()
   createPlayerdeck()
   createEnemyTeam()
-  attachCardEventListeners() 
-  attachEnemyEventListeners()
   turn="player"
 }
 
@@ -161,6 +160,8 @@ function createEnemy(enemyId)
   // document.body.appendChild(newCard)
 
   // console.log(newCard)
+  attachEnemyEventListeners()
+
 }
 
 
@@ -168,8 +169,11 @@ function updatehealthBar()
 {
   if(player.health>player.maxHealth) player.health=player.maxHealth
   
-  if(player.health<0) player.health=0
-  
+  if(player.health<=0) 
+  {
+    player.health=0
+    gameState="defeat"
+  }
   const healthBar =document.getElementById("currentHealth")
   healthBar.style.width=`${(player.health/player.maxHealth)*100}%`
  
@@ -200,7 +204,7 @@ function createPlayerdeck() {
 
     // Avoid trying to get a card if unusedDeck is still empty
     if (unusedDeckLength === 0) {
-      console.warn("No cards left to draw!");
+      console.log("No cards left to draw!");
       break;
     }
 
@@ -247,152 +251,155 @@ function createEnemyTeam()
 
 
 function handleClick (event) 
-{
-  playerCardsElement = [...document.getElementsByClassName("card")];
-
-  enemiesElement = [...document.querySelectorAll(".enemy")];
-
-  if(event.target.classList.contains("cardPart"))
+{ if(gameState==="battle")
   {
-    let cardElement=null
-    //to target the whole card div
-    if(!event.target.classList.contains("card"))
+    playerCardsElement = [...document.getElementsByClassName("card")];
+
+    enemiesElement = [...document.querySelectorAll(".enemy")];
+
+    if(event.target.classList.contains("cardPart"))
     {
-      cardElement =event.target.parentElement;
-            
-      while(cardElement.classList.contains("card")!==true)
+      let cardElement=null
+      //to target the whole card div
+      if(!event.target.classList.contains("card"))
       {
-        cardElement =cardElement.parentElement;
+        cardElement =event.target.parentElement;
+              
+        while(cardElement.classList.contains("card")!==true)
+        {
+          cardElement =cardElement.parentElement;
+        }
+      }
+      else
+      {
+        cardElement=event.target
+      }
+
+      if(cardElement.classList.contains("selected"))
+      {
+
+        let selectedCard= getSelectedCard()
+
+        let cardId=Number(selectedCard.querySelector(".cardId").textContent)
+
+        const card =cards.find(card=>card.id===cardId)
+
+        if("damage" in card===false)
+        {
+          if("heal" in card)
+          {
+            console.log(`you healed ${card.heal} Health!!`)
+            player.health+=card.heal
+          }
+
+          if("shield" in card)
+          {
+            player.shield+=card.shield
+            console.log(`shielded up ${card.shield}`)
+          }
+            
+          if("powerup" in card)
+          {
+              
+            console.log(`powered up`)
+          }
+          const selectedCardIndex = Array.from(selectedCard.parentElement.children).indexOf(selectedCard);
+          player.usedDeck.push(card.id)
+          player.deck.splice(selectedCardIndex,1)
+          player.health-=(card.cost)
+          updatehealthBar()
+
+          //  playerCardsElement=[...document.getElementsByClassName("card")]
+          removeSelectedCard()
+          // selectedCard.remove()
+          console.log('player.unusedDeck',player.unusedDeck)
+          console.log('player.usedDeck',player.usedDeck)
+          console.log('player.deck',player.deck)
+        }
+      }
+      else
+      {
+        if(checkSelectedCard())
+        {
+            playerCardsElement.forEach(card => card.classList.remove("selected"))
+        } 
+
+        cardElement.classList.add("selected")
       }
     }
-    else
+    else if (event.target.classList.contains("enemyPart"))
     {
-      cardElement=event.target
-    }
+      let enemyElement=null
 
-    if(cardElement.classList.contains("selected"))
-    {
-
-      let selectedCard= getSelectedCard()
-
-      let cardId=Number(selectedCard.querySelector(".cardId").textContent)
-
-      const card =cards.find(card=>card.id===cardId)
-
-      if("damage" in card===false)
+      if(!event.target.classList.contains("enemy"))
       {
-        if("heal" in card)
+        enemyElement =event.target.parentElement;
+              
+        while(enemyElement.classList.contains("enemy")!==true)
         {
-          console.log(`you healed ${card.heal} Health!!`)
-          player.health+=card.heal
+          enemyElement =enemyElement.parentElement;
         }
-
-        if("shield" in card)
-        {
-          player.shield+=card.shield
-          console.log(`shielded up ${card.shield}`)
-        }
-          
-        if("powerup" in card)
-        {
-            
-          console.log(`powered up`)
-        }
-        const selectedCardIndex = Array.from(selectedCard.parentElement.children).indexOf(selectedCard);
-        player.usedDeck.push(card.id)
-        player.deck.splice(selectedCardIndex,1)
-        player.health-=(card.cost)
-        updatehealthBar()
-
-        //  playerCardsElement=[...document.getElementsByClassName("card")]
-        removeSelectedCard()
-        // selectedCard.remove()
-        console.log('player.unusedDeck',player.unusedDeck)
-        console.log('player.usedDeck',player.usedDeck)
-        console.log('player.deck',player.deck)
       }
-    }
-    else
-    {
+      else
+      {
+        enemyElement=event.target
+      }
+      console.log(enemyElement)
+        // console.log(playerCardsElement)
       if(checkSelectedCard())
       {
-          playerCardsElement.forEach(card => card.classList.remove("selected"))
-      } 
+        let selectedCard= getSelectedCard()
 
-      cardElement.classList.add("selected")
-    }
-  }
-  else if (event.target.classList.contains("enemyPart"))
-  {
-    let enemyElement=null
+        let cardId=Number(selectedCard.querySelector(".cardId").textContent)
+        
+        const card =cards.find(card=>card.id===cardId)
 
-    if(!event.target.classList.contains("enemy"))
-    {
-      enemyElement =event.target.parentElement;
-            
-      while(enemyElement.classList.contains("enemy")!==true)
-      {
-        enemyElement =enemyElement.parentElement;
-      }
-    }
-    else
-    {
-      enemyElement=event.target
-    }
-    console.log(enemyElement)
-      // console.log(playerCardsElement)
-    if(checkSelectedCard())
-    {
-      let selectedCard= getSelectedCard()
+        if("damage" in card)
+        { 
+          const selectedCardIndex = Array.from(selectedCard.parentElement.children).indexOf(selectedCard);
+          player.usedDeck.push(card.id)
+          player.deck.splice(selectedCardIndex,1)
+          // console.log(`you dealt ${card.damage} damage!!`)
+          player.health-=(card.cost)
+          updatehealthBar()
+          //  playerCardsElement=[...document.getElementsByClassName("card")]
+          removeSelectedCard()
+          // selectedCard.remove()
+          const enemyIndex = Array.from(enemyElement.parentElement.children).indexOf(enemyElement);
+          currentEnemies[enemyIndex].health-=card.damage
+          enemyElement.querySelector(".enemyCurrentHealth").style.width=`${(currentEnemies[enemyIndex].health/currentEnemies[enemyIndex].maxHealth)*100}%`
+          enemyElement.querySelector(".enemyHealth").textContent=`${currentEnemies[enemyIndex].health}/${currentEnemies[enemyIndex].maxHealth}`
+          if(currentEnemies[enemyIndex].health<=0)
+          {
+            enemyElement.remove()
+            currentEnemies.splice(enemyIndex,1)
 
-      let cardId=Number(selectedCard.querySelector(".cardId").textContent)
-      
-      const card =cards.find(card=>card.id===cardId)
+          }
+          enemiesElement= document.querySelectorAll(".enemy")
 
-      if("damage" in card)
-      { 
-        const selectedCardIndex = Array.from(selectedCard.parentElement.children).indexOf(selectedCard);
-        player.usedDeck.push(card.id)
-        player.deck.splice(selectedCardIndex,1)
-        // console.log(`you dealt ${card.damage} damage!!`)
-        player.health-=(card.cost)
-        updatehealthBar()
-        //  playerCardsElement=[...document.getElementsByClassName("card")]
-        removeSelectedCard()
-        // selectedCard.remove()
-        const enemyIndex = Array.from(enemyElement.parentElement.children).indexOf(enemyElement);
-        currentEnemies[enemyIndex].health-=card.damage
-        enemyElement.querySelector(".enemyCurrentHealth").style.width=`${(currentEnemies[enemyIndex].health/currentEnemies[enemyIndex].maxHealth)*100}%`
-        enemyElement.querySelector(".enemyHealth").textContent=`${currentEnemies[enemyIndex].health}/${currentEnemies[enemyIndex].maxHealth}`
-        if(currentEnemies[enemyIndex].health<=0)
-        {
-          enemyElement.remove()
-          currentEnemies.splice(enemyIndex,1)
+          console.log('player.unusedDeck',player.unusedDeck)
+          console.log('player.usedDeck',player.usedDeck)
+          console.log('player.deck',player.deck)
+          // console.log(enemiesElement)
+          // console.log(enemyIndex)
+          // console.log(currentEnemies)
+          // console.log(card)
+          // console.log("Attacked an enemy")
 
         }
-        enemiesElement= document.querySelectorAll(".enemy")
 
-        console.log('player.unusedDeck',player.unusedDeck)
-        console.log('player.usedDeck',player.usedDeck)
-        console.log('player.deck',player.deck)
-        // console.log(enemiesElement)
-        // console.log(enemyIndex)
-        // console.log(currentEnemies)
-        // console.log(card)
-        // console.log("Attacked an enemy")
+        
 
+        
       }
+      else
+      {
 
-      
-
-      
+        console.log(currentEnemies)
+        console.log("Enemy")
+      }
     }
-    else
-    {
-
-      console.log(currentEnemies)
-      console.log("Enemy")
-    }
+    checkGameState()
   }
 }
 
@@ -427,14 +434,34 @@ function removeAllCards()
 
 function endTurn()
 {
-  turn="enemy"
-  createPlayerdeck()
-  
-  console.log(turn)
-  turn="player"
-  console.log(turn)
+  if(gameState==="battle")
+  {
+    turn="enemy"
+    createPlayerdeck()
+    
+    console.log(turn)
+    turn="player"
+    console.log(turn)
+  }
 }
 
+function checkGameState()
+{
+  if(gameState==="battle")
+  {
+    enemiesElement = [...document.querySelectorAll(".enemy")];
+    
+    if(enemiesElement.length===0)
+    {
+      console.log("You WOOOOOOOOON!!!!!!")
+      gameState="victory"
+    }
+  }
+  else if(gameState==="defeat")
+  {
+   console.log("You loooost!!!!!!")
+  }
+}
 init()
 // function handleClick2 (event){
 
