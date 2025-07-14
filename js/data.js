@@ -4,10 +4,10 @@ const cards =
   {
     id: 1,
     name: "Enchanting blood",
-    cost: 3,
+    cost: 7,
     type: "Power",
     powerup: 2,
-    description: "Doubles the next instance of damage.",
+    description: "Doubles the damage of the current deck.",
     img: "url"
   },
   {
@@ -52,6 +52,7 @@ const cards =
     cost: 2,
     type: "Attack",
     damage:4,
+    pierce:true,
     description: "Deals 4 damage that ignores armor.",
     img: "url"
   },
@@ -67,10 +68,10 @@ const cards =
   {
     id: 8,
     name: "Blinding Light",
-    cost: 2,
+    cost: 4,
     type: "Skill",
-    blind:1,
-    description: "Blinds the enemy, causing them to miss their next turn.",
+    dodge:2,
+    description: "Blinds some enemies, causing them to miss their next 2 attacks.",
     img: "url"
   },
   {
@@ -78,7 +79,7 @@ const cards =
     name: "Berserker Rage",
     cost: 5,
     type: "Power",
-    adddamage:4,
+    addDamage:4,
     description: "Gain +4 damage on all attacks.",
     img: "url"
   },

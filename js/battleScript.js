@@ -6,9 +6,11 @@ const difficulty=sessionStorage.getItem("difficulty")
 
 const currentEnemies=[]
 
+let currentCards=[]
+
 const player =
 {
-  health:40,maxHealth:40,shield:0,maxShield:0, deck:[], unusedDeck:[2,2,2,2,7,7,7,7,7,6,6,6,3,3,3,4,4], usedDeck:[],
+  health:40,maxHealth:40,shield:0,maxShield:0, deck:[], unusedDeck:[1,1,1,2,2,2,7,7,7,6,6,5,5,5,8,8,8], usedDeck:[],
 }
 
 
@@ -54,7 +56,6 @@ function init(){
   createEnemyTeam()
   selectEnemyMove()
   turn="player"
-  
 }
 
 function attachCardEventListeners() 
@@ -221,12 +222,13 @@ function createPlayerdeck() {
   for (let i = 0; i < player.deck.length; i++) {
     player.usedDeck.push(player.deck[i]);
   }
+  currentCards=[]
   player.deck = [];
   removeAllCards()
   for (let i = 0; i < 4; i++) {
     // Refill unusedDeck if it's empty
     if (player.unusedDeck.length === 0) {
-      console.log("Refilling unusedDeck from usedDeck");
+      // console.log("Refilling unusedDeck from usedDeck");
       player.unusedDeck = player.usedDeck;
       player.usedDeck = [];
     }
@@ -236,22 +238,24 @@ function createPlayerdeck() {
 
     // Avoid trying to get a card if unusedDeck is still empty
     if (unusedDeckLength === 0) {
-      console.log("No cards left to draw!");
+      // console.log("No cards left to draw!");
       break;
     }
 
     let index = Math.floor(Math.random() * unusedDeckLength);
-    let card = player.unusedDeck[index];
+    let cardIdx = player.unusedDeck[index];
    
 
-    if (!card) {
+    if (!cardIdx) {
       console.error("Selected card is undefined", index, player.unusedDeck);
       continue;
     }
     // console.log(card)
     
-    createCard(card);              // render/prepare card
-    player.deck.push(card);       // add to active deck
+    createCard(cardIdx);              // render/prepare card
+    currentCards.push(structuredClone(cards.find(card=>card.id===cardIdx)))
+    // console.log(currentCards)
+    player.deck.push(cardIdx);       // add to active deck
     player.unusedDeck.splice(index, 1); // remove from unused
   }
   attachCardEventListeners() 
@@ -262,7 +266,7 @@ function drawCards(drawCount)
   for (let i= drawCount; i >0; i--) {
     // Refill unusedDeck if it's empty
     if (player.unusedDeck.length === 0) {
-      console.log("Refilling unusedDeck from usedDeck");
+      // console.log("Refilling unusedDeck from usedDeck");
       player.unusedDeck = player.usedDeck;
       player.usedDeck = [];
     }
@@ -272,27 +276,34 @@ function drawCards(drawCount)
 
     // Avoid trying to get a card if unusedDeck is still empty
     if (unusedDeckLength === 0) {
-      console.log("No cards left to draw!");
+      // console.log("No cards left to draw!");
       break;
     }
 
     let index = Math.floor(Math.random() * unusedDeckLength);
-    let card = player.unusedDeck[index];
+    let cardIdx = player.unusedDeck[index];
    
 
-    if (!card) {
+    if (!cardIdx) {
       console.error("Selected card is undefined", index, player.unusedDeck);
       continue;
     }
     // console.log(card)
     
-    createCard(card);              // render/prepare card
-    player.deck.push(card);       // add to active deck
+    createCard(cardIdx);              // render/prepare card
+    currentCards.push(structuredClone(cards.find(card=>card.id===cardIdx)))        
+    // console.log(currentCards)
+    player.deck.push(cardIdx);       // add to active deck
     player.unusedDeck.splice(index, 1); // remove from unused
   }
   attachCardEventListeners() 
 }
+
+// function addMoreDamage(addedDamage)
+// {
   
+//   console.log("added more damage.")
+// }
   
 
 function createEnemyTeam()
@@ -309,7 +320,16 @@ function createEnemyTeam()
 }
 
 
+// function updateCards()
+// {
+//   playerCardsElement = [...document.getElementsByClassName("card")];
 
+//   playerCardsElement.forEach(card =>
+//   {
+//     // card.getElementsByClassName()
+//   }
+//   )
+// }
 
 
 
@@ -352,33 +372,61 @@ function handleClick (event)
 
         if("damage" in card===false)
         {
+          const selectedCardIndex = Array.from(selectedCard.parentElement.children).indexOf(selectedCard);
           if("heal" in card)
           {
-            console.log(`you healed ${card.heal} Health!!`)
-            player.health+=card.heal
+            // console.log(`you healed ${card.heal} Health!!`)
+            player.health+=currentCards[selectedCardIndex].heal
           }
 
           if("shield" in card)
           {
-            player.shield+=card.shield
-            console.log(`shielded up ${card.shield}`)
+            player.shield+=currentCards[selectedCardIndex].shield
+            // console.log(`shielded up ${card.shield}`)
           }
             
           if("powerup" in card)
           {
               
-            console.log(`powered up`)
+            for(let i=0;i<currentCards.length;i++)
+            {
+              if("damage" in currentCards[i])
+              {
+                currentCards[i].damage*=currentCards[selectedCardIndex].powerup
+              }
+            }
+            // console.log(`powered up`)
           }
           if("draw" in card)
           {
             drawCards(card.draw)
           }
-          const selectedCardIndex = Array.from(selectedCard.parentElement.children).indexOf(selectedCard);
+          if("addDamage" in card)
+          {
+            for(let i=0;i<currentCards.length;i++)
+            {
+              if("damage" in currentCards[i])
+              {
+                currentCards[i].damage+=currentCards[selectedCardIndex].addDamage
+              }
+            }
+          }
+          if("dodge" in card)
+          {
+            if(!player.dodge)
+            {
+              player.dodge=0
+            }
+            player.dodge+=card.dodge
+          }
           player.usedDeck.push(card.id)
+          // console.log(currentCards)
+          // console.log(selectedCard)
           player.deck.splice(selectedCardIndex,1)
-          player.health-=(card.cost)
+          player.health-=(currentCards[selectedCardIndex].cost)
           updatePlayerBars()
           //  playerCardsElement=[...document.getElementsByClassName("card")]
+          currentCards.splice(selectedCardIndex,1)
           removeSelectedCard()
           // selectedCard.remove()
           // console.log('player.unusedDeck',player.unusedDeck)
@@ -427,25 +475,27 @@ function handleClick (event)
         { 
           const selectedCardIndex = Array.from(selectedCard.parentElement.children).indexOf(selectedCard);
           player.usedDeck.push(card.id)
+          // console.log(currentCards)
           player.deck.splice(selectedCardIndex,1)
           // console.log(`you dealt ${card.damage} damage!!`)
-          player.health-=(card.cost)
+          player.health-=(currentCards[selectedCardIndex].cost)
           updatePlayerBars()
           //  playerCardsElement=[...document.getElementsByClassName("card")]
-          removeSelectedCard()
           // selectedCard.remove()
           const enemyIndex = Array.from(enemyElement.parentElement.children).indexOf(enemyElement);
-          currentEnemies[enemyIndex].health-=card.damage
+          currentEnemies[enemyIndex].health-=currentCards[selectedCardIndex].damage
           enemyElement.querySelector(".enemyCurrentHealth").style.width=`${(currentEnemies[enemyIndex].health/currentEnemies[enemyIndex].maxHealth)*100}%`
           enemyElement.querySelector(".enemyHealth").textContent=`${currentEnemies[enemyIndex].health}/${currentEnemies[enemyIndex].maxHealth}`
           if(currentEnemies[enemyIndex].health<=0)
-          {
-            enemyElement.remove()
-            currentEnemies.splice(enemyIndex,1)
-
-          }
-          enemiesElement= document.querySelectorAll(".enemy")
-
+            {
+              enemyElement.remove()
+              currentEnemies.splice(enemyIndex,1)
+              
+            }
+            enemiesElement= document.querySelectorAll(".enemy")
+            // console.log(cards)
+          currentCards.splice(selectedCardIndex,1)
+          removeSelectedCard()
           // console.log('player.unusedDeck',player.unusedDeck)
           // console.log('player.usedDeck',player.usedDeck)
           // console.log('player.deck',player.deck)
@@ -464,8 +514,8 @@ function handleClick (event)
       else
       {
 
-        console.log(currentEnemies)
-        console.log("Enemy")
+        // console.log(currentEnemies)
+        // console.log("Enemy")
       }
     }
     if(player.deck.length===0) endTurn();
@@ -544,7 +594,7 @@ function selectEnemyMove()
   {
   enemyAction[0].innerText=`${enemyAction[0].innerText} 👀🚫`
   }
-  if("adddamage" in currentEnemies[enemyCardIdx].move)
+  if("addDamage" in currentEnemies[enemyCardIdx].move)
   {
   enemyAction[0].innerText=`${enemyAction[0].innerText} ⚔️+`
   }
@@ -571,6 +621,14 @@ function endTurn()
 
       if("damage" in enemyMove)
       {
+        if(player.dodge)
+        {
+          console.log(player.dodge)
+          player.dodge-=1
+          if(player.dodge<=0) delete player.dodge
+          console.log(player.dodge)
+          return
+        }
         if(player.shield>=0)
         {
           if(enemyMove.damage>player.shield)
@@ -588,6 +646,7 @@ function endTurn()
           player.health-=enemyMove.damage
         }
       }
+    
       // console.log(enemy.name,"enemy used",enemyMove)
     }
     )
@@ -612,14 +671,14 @@ function checkGameState()
     
     if(enemiesElement.length===0)
     {
-      console.log("You WOOOOOOOOON!!!!!!")
+      // console.log("You WOOOOOOOOON!!!!!!")
       gameState="victory"
       // window.alert("Won.")
     }
   }
   else if(gameState==="defeat")
   {
-   console.log("You loooost!!!!!!")
+  //  console.log("You loooost!!!!!!")
    window.alert("lost.")
   }
 }
