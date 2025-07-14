@@ -58,10 +58,10 @@ const cards =
   {
     id: 7,
     name: "Healing Touch",
-    cost: 4,
+    cost: 0,
     type: "Skill",
-    heal: 6,
-    description: "Restores 6 health to the player.",
+    heal: 4,
+    description: "Restores 4 health to the player.",
     img: "url"
   },
   {
@@ -103,7 +103,9 @@ const enemies =
     health: 10,
     temper: "aggressive",
     deck: [1, 2, 5],
-    image: "url"
+    image: "url",
+    move: "",
+    moveId: ""
   },
   {
     id: 2,
@@ -112,7 +114,9 @@ const enemies =
     health: 20,
     temper: "defensive",
     deck: [3, 4, 6],
-    image: "url"
+    image: "url",
+    move: "",
+    moveId: ""
   },
   {
     id: 3,
@@ -121,7 +125,9 @@ const enemies =
     health: 8,
     temper: "aggressive",
     deck: [1, 7, 8],
-    image: "url"
+    image: "url",
+    move: "",
+    moveId: ""
   },
   {
     id: 4,
@@ -130,7 +136,9 @@ const enemies =
     health: 12,
     temper: "defensive",
     deck: [9, 10, 2],
-    image: "url"
+    image: "url",
+    move: "",
+    moveId: ""
   },
   {
     id: 5,
@@ -139,7 +147,9 @@ const enemies =
     health: 15,
     temper: "aggressive",
     deck: [2, 5, 7],
-    image: "url"
+    image: "url",
+    move: "",
+    moveId: ""
   },
   {
     id: 6,
@@ -148,7 +158,9 @@ const enemies =
     health: 13,
     temper: "aggressive",
     deck: [1, 3, 8],
-    image: "url"
+    image: "url",
+    move: "",
+    moveId: ""
   },
   {
     id: 7,
@@ -157,7 +169,9 @@ const enemies =
     health: 25,
     temper: "defensive",
     deck: [4, 6, 9],
-    image: "url"
+    image: "url",
+    move: "",
+    moveId: ""
   },
   {
     id: 8,
@@ -166,7 +180,9 @@ const enemies =
     health: 11,
     temper: "aggressive",
     deck: [7, 10, 1],
-    image: "url"
+    image: "url",
+    move: "",
+    moveId: ""
   },
   {
     id: 9,
@@ -175,7 +191,9 @@ const enemies =
     health: 14,
     temper: "defensive",
     deck: [3, 9, 5],
-    image: "url"
+    image: "url",
+    move: "",
+    moveId: ""
   },
   {
     id: 10,
@@ -184,7 +202,9 @@ const enemies =
     health: 16,
     temper: "aggressive",
     deck: [4, 6, 10],
-    image: "url"
+    image: "url",
+    move: "",
+    moveId: ""
   }
 ];
 

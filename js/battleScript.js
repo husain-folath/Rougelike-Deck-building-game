@@ -8,7 +8,7 @@ const currentEnemies=[]
 
 const player =
 {
-  health:40,maxHealth:40,shield:0,maxShield:0, deck:[], unusedDeck:[2,2,2,2,7,7,7,7,7,6,6,6], usedDeck:[],
+  health:40,maxHealth:40,shield:0,maxShield:0, deck:[], unusedDeck:[2,2,2,2,7,7,7,7,7,6,6,6,3,3,3], usedDeck:[],
 }
 
 
@@ -52,6 +52,7 @@ function init(){
   updatePlayerBars()
   createPlayerdeck()
   createEnemyTeam()
+  selectEnemyMove()
   turn="player"
   
 }
@@ -137,7 +138,7 @@ function createEnemy(enemyId)
 
   const newEnemyAction=document.createElement("div")
   newEnemyAction.classList.add("enemyAction","enemyPart")
-  newEnemyAction.textContent="5 🗡️"
+  // newEnemyAction.textContent=""
 
   const newEnemyMaxHealth=document.createElement("div")
   newEnemyMaxHealth.classList.add("enemyMaxHealth","enemyPart")
@@ -429,6 +430,7 @@ function handleClick (event)
         console.log("Enemy")
       }
     }
+    if(player.deck.length===0) endTurn();
     checkGameState()
   }
 }
@@ -462,22 +464,93 @@ function removeAllCards()
   playerCardsElement.forEach(card=> card.remove())
 }
 
+function selectEnemyMove()
+{
+  enemiesElement = [...document.querySelectorAll(".enemy")];
+  currentEnemies.forEach((enemy,enemyIdx)=>
+  {
+
+    let enemyMoveIdx=Math.floor(Math.random()*enemy.deck.length)
+    enemy.moveId=enemy.deck[enemyMoveIdx]
+    enemy.move=cards.find(card=>card.id===enemy.moveId)  // console.log(enemy.name,"enemy used",enemy.move,enemy.moveId)
+  })
+  enemiesElement.forEach((enemyCard, enemyCardIdx)=>
+  {
+    let enemyAction=enemyCard.getElementsByClassName("enemyAction")
+  enemyAction[0].innerText=""
+  if("damage" in currentEnemies[enemyCardIdx].move)
+  {
+    enemyAction[0].innerText=`${currentEnemies[enemyCardIdx].move.damage} 🗡️`
+  }
+  if("shield" in currentEnemies[enemyCardIdx].move)
+  {
+  enemyAction[0].innerText=`${enemyAction[0].innerText} ${currentEnemies[enemyCardIdx].move.shield} 🛡️`
+  }
+  if("powerup" in currentEnemies[enemyCardIdx].move)
+  {
+  enemyAction[0].innerText=`${enemyAction[0].innerText} 💪`
+  }
+  if("draw" in currentEnemies[enemyCardIdx].move)
+  {
+  enemyAction[0].innerText=`${enemyAction[0].innerText} 🃏`  
+  }
+  if("dodge" in currentEnemies[enemyCardIdx].move)
+  {
+  enemyAction[0].innerText=`${enemyAction[0].innerText} 💨`
+  }
+  if("heal" in currentEnemies[enemyCardIdx].move)
+  {
+  enemyAction[0].innerText=`${enemyAction[0].innerText} ${currentEnemies[enemyCardIdx].move.heal} ❤️`
+  }
+  if("blind" in currentEnemies[enemyCardIdx].move)
+  {
+  enemyAction[0].innerText=`${enemyAction[0].innerText} 👀🚫`
+  }
+  if("adddamage" in currentEnemies[enemyCardIdx].move)
+  {
+  enemyAction[0].innerText=`${enemyAction[0].innerText} ⚔️+`
+  }
+  if("freeze" in currentEnemies[enemyCardIdx].move)
+  {
+  enemyAction[0].innerText=`${enemyAction[0].innerText} ❄️`
+  }
+// console.log(enemyAction[0].innerText)
+    // console.log(enemyAction)
+    // enemyAction.textContent=1
+  }
+  )
+}
 function endTurn()
 {
   if(gameState==="battle")
   {
     turn="enemy"
+
     currentEnemies.forEach(enemy=>
     {
       // console.log(enemy.deck.length)
-      let enemyMoveIdx=Math.floor(Math.random()*enemy.deck.length)
-      let enemyMoveId=enemy.deck[enemyMoveIdx]
-      let enemyMove=cards.find(card=>card.id===enemyMoveId)
+      let enemyMove=enemy.move
+
       if("damage" in enemyMove)
       {
-        player.health-=enemyMove.damage
+        if(player.shield>=0)
+        {
+          if(enemyMove.damage>player.shield)
+          {
+            player.health-=(enemyMove.damage-player.shield)
+            player.shield-=enemyMove.damage
+          }
+          else
+          {
+            player.shield-=enemyMove.damage
+          }
+        }
+        else
+        {
+          player.health-=enemyMove.damage
+        }
       }
-      console.log(enemy.name,"enemy used",enemyMove)
+      // console.log(enemy.name,"enemy used",enemyMove)
     }
     )
     createPlayerdeck()
@@ -485,10 +558,12 @@ function endTurn()
     // console.log(turn)
     turn="player"
     // console.log(turn)
+    selectEnemyMove()
   }
 
+  
   updatePlayerBars()
-
+  checkGameState()
 }
 
 function checkGameState()
@@ -501,11 +576,13 @@ function checkGameState()
     {
       console.log("You WOOOOOOOOON!!!!!!")
       gameState="victory"
+      window.alert("Won.")
     }
   }
   else if(gameState==="defeat")
   {
    console.log("You loooost!!!!!!")
+   window.alert("lost.")
   }
 }
 init()
