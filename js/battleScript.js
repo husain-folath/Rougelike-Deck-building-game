@@ -8,7 +8,7 @@ const currentEnemies=[]
 
 const player =
 {
-  health:40,maxHealth:40,shield:0,maxShield:0, deck:[], unusedDeck:[2,2,2,2,7,7,7,7,7,6,6,6,3,3,3], usedDeck:[],
+  health:40,maxHealth:40,shield:0,maxShield:0, deck:[], unusedDeck:[2,2,2,2,7,7,7,7,7,6,6,6,3,3,3,4,4], usedDeck:[],
 }
 
 
@@ -257,7 +257,41 @@ function createPlayerdeck() {
   attachCardEventListeners() 
 }
 
+function drawCards(drawCount)
+{
+  for (let i= drawCount; i >0; i--) {
+    // Refill unusedDeck if it's empty
+    if (player.unusedDeck.length === 0) {
+      console.log("Refilling unusedDeck from usedDeck");
+      player.unusedDeck = player.usedDeck;
+      player.usedDeck = [];
+    }
 
+    // Update length AFTER possible refill
+    let unusedDeckLength = player.unusedDeck.length;
+
+    // Avoid trying to get a card if unusedDeck is still empty
+    if (unusedDeckLength === 0) {
+      console.log("No cards left to draw!");
+      break;
+    }
+
+    let index = Math.floor(Math.random() * unusedDeckLength);
+    let card = player.unusedDeck[index];
+   
+
+    if (!card) {
+      console.error("Selected card is undefined", index, player.unusedDeck);
+      continue;
+    }
+    // console.log(card)
+    
+    createCard(card);              // render/prepare card
+    player.deck.push(card);       // add to active deck
+    player.unusedDeck.splice(index, 1); // remove from unused
+  }
+  attachCardEventListeners() 
+}
   
   
 
@@ -334,6 +368,10 @@ function handleClick (event)
           {
               
             console.log(`powered up`)
+          }
+          if("draw" in card)
+          {
+            drawCards(card.draw)
           }
           const selectedCardIndex = Array.from(selectedCard.parentElement.children).indexOf(selectedCard);
           player.usedDeck.push(card.id)
@@ -576,7 +614,7 @@ function checkGameState()
     {
       console.log("You WOOOOOOOOON!!!!!!")
       gameState="victory"
-      window.alert("Won.")
+      // window.alert("Won.")
     }
   }
   else if(gameState==="defeat")
