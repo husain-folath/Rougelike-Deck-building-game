@@ -10,7 +10,7 @@ let currentCards=[]
 
 const player =
 {
-  health:40,maxHealth:40,shield:0,maxShield:0, deck:[], unusedDeck:[1,1,1,2,2,2,7,7,7,6,6,5,5,5,8,8,8], usedDeck:[],
+  health:40,maxHealth:40,shield:0,maxShield:0, deck:[], unusedDeck:[ 2, 5, 6, 7, 8, 11, 13, 14, 3, 10, 12, 15, 4, 9, 1, 16, 10, 7, 11, 8, 6, 2, 14, 15, 3  ], usedDeck:[],
 }
 
 
@@ -141,6 +141,9 @@ function createEnemy(enemyId)
   newEnemyAction.classList.add("enemyAction","enemyPart")
   // newEnemyAction.textContent=""
 
+  const newEnemyBars=document.createElement("div")
+  newEnemyBars.classList.add("enemyBars","enemyPart")
+
   const newEnemyMaxHealth=document.createElement("div")
   newEnemyMaxHealth.classList.add("enemyMaxHealth","enemyPart")
 
@@ -152,10 +155,23 @@ function createEnemy(enemyId)
   newEnemyCurrentHealth.classList.add("enemyCurrentHealth","enemyPart")
   newEnemyCurrentHealth.style.width=`${(newEnemyInfo.health/newEnemyInfo.maxHealth)*100}%`
  
+  const newEnemyMaxShield=document.createElement("div")
+  newEnemyMaxShield.classList.add("enemyMaxShield","enemyPart","hidden")
 
+  const newEnemyShield=document.createElement("p")
+  newEnemyShield.classList.add("enemyShield","enemyPart")
+  newEnemyShield.textContent=`${newEnemyInfo.health}/${newEnemyInfo.maxHealth}`
+
+  const newEnemyCurrentShield=document.createElement("div")
+  newEnemyCurrentShield.classList.add("enemyCurrentShield","enemyPart")
+  // newEnemyCurrentShield.style.width=`100%`
+
+
+  newEnemyMaxShield.append(newEnemyCurrentShield,newEnemyShield)
   newEnemyMaxHealth.append(newEnemyCurrentHealth,newEnemyHealth)
 
-  newEnemy.append(newEnemyId,newEnemyName,newEnemyImage,newEnemyMaxHealth,newEnemyAction)
+  newEnemyBars.append(newEnemyMaxHealth, newEnemyMaxShield)
+  newEnemy.append(newEnemyId,newEnemyName,newEnemyImage,newEnemyBars,newEnemyAction)
 
   const enemiesBelt = document.getElementById("enemiesBelt")
   enemiesBelt.appendChild(newEnemy)
@@ -310,8 +326,10 @@ function createEnemyTeam()
 {
   for(let i=0;i<4;i++)
   {
-    createEnemy(i+1)
-    currentEnemies[i]=enemies.find(enemy=>enemy.id===(i+1))
+    let newEnemyIdx=Math.ceil(Math.random()*enemies.length)
+    console.log(newEnemyIdx)
+    createEnemy(newEnemyIdx)
+    currentEnemies[i]=enemies.find(enemy=>enemy.id===(newEnemyIdx))
   }
   // console.log(currentEnemies)
   enemiesElement = [...document.querySelectorAll(".enemy")];
@@ -473,19 +491,89 @@ function handleClick (event)
 
         if("damage" in card)
         { 
+          
           const selectedCardIndex = Array.from(selectedCard.parentElement.children).indexOf(selectedCard);
+          
+          
           player.usedDeck.push(card.id)
           // console.log(currentCards)
           player.deck.splice(selectedCardIndex,1)
           // console.log(`you dealt ${card.damage} damage!!`)
           player.health-=(currentCards[selectedCardIndex].cost)
-          updatePlayerBars()
+          
           //  playerCardsElement=[...document.getElementsByClassName("card")]
           // selectedCard.remove()
           const enemyIndex = Array.from(enemyElement.parentElement.children).indexOf(enemyElement);
+          if(currentEnemies[enemyIndex].shield && currentEnemies[enemyIndex].shield>0 && !currentCards[selectedCardIndex].pierce===true)
+          {
+            if(currentCards[selectedCardIndex].damage<currentEnemies[enemyIndex].shield)
+            {
+            currentEnemies[enemyIndex].shield-=currentCards[selectedCardIndex].damage
+            enemyElement.querySelector(".enemyCurrentShield").style.width=`${(currentEnemies[enemyIndex].shield/currentEnemies[enemyIndex].maxShield)*100}%`
+            enemyElement.querySelector(".enemyShield").textContent=`${currentEnemies[enemyIndex].shield}/${currentEnemies[enemyIndex].maxShield}`
+            currentCards[selectedCardIndex].damage=0
+            }
+            else
+            {
+              currentCards[selectedCardIndex].damage-=currentEnemies[enemyIndex].shield
+              currentEnemies[enemyIndex].shield=0
+              currentEnemies[enemyIndex].maxShield=0
+              enemyElement.querySelector(".enemyCurrentShield").style.width=`${(currentEnemies[enemyIndex].shield/currentEnemies[enemyIndex].maxShield)*100}%`
+              enemyElement.querySelector(".enemyShield").textContent=`${currentEnemies[enemyIndex].shield}/${currentEnemies[enemyIndex].maxShield}`
+              enemyElement.querySelector(".enemyMaxShield").classList.add("hidden")
+            
+            }
+          }
           currentEnemies[enemyIndex].health-=currentCards[selectedCardIndex].damage
           enemyElement.querySelector(".enemyCurrentHealth").style.width=`${(currentEnemies[enemyIndex].health/currentEnemies[enemyIndex].maxHealth)*100}%`
           enemyElement.querySelector(".enemyHealth").textContent=`${currentEnemies[enemyIndex].health}/${currentEnemies[enemyIndex].maxHealth}`
+          
+          if("heal" in card)
+          {
+            // console.log(`you healed ${card.heal} Health!!`)
+            player.health+=currentCards[selectedCardIndex].heal
+          }
+
+          if("shield" in card)
+          {
+            player.shield+=currentCards[selectedCardIndex].shield
+            // console.log(`shielded up ${card.shield}`)
+          }
+            
+          if("powerup" in card)
+          {
+              
+            for(let i=0;i<currentCards.length;i++)
+            {
+              if("damage" in currentCards[i])
+              {
+                currentCards[i].damage*=currentCards[selectedCardIndex].powerup
+              }
+            }
+            // console.log(`powered up`)
+          }
+          if("draw" in card)
+          {
+            drawCards(card.draw)
+          }
+          if("addDamage" in card)
+          {
+            for(let i=0;i<currentCards.length;i++)
+            {
+              if("damage" in currentCards[i])
+              {
+                currentCards[i].damage+=currentCards[selectedCardIndex].addDamage
+              }
+            }
+          }
+          if("dodge" in card)
+          {
+            if(!player.dodge)
+            {
+              player.dodge=0
+            }
+            player.dodge+=card.dodge
+          }
           if(currentEnemies[enemyIndex].health<=0)
             {
               enemyElement.remove()
@@ -494,6 +582,7 @@ function handleClick (event)
             }
             enemiesElement= document.querySelectorAll(".enemy")
             // console.log(cards)
+            updatePlayerBars()
           currentCards.splice(selectedCardIndex,1)
           removeSelectedCard()
           // console.log('player.unusedDeck',player.unusedDeck)
@@ -570,6 +659,10 @@ function selectEnemyMove()
   {
     enemyAction[0].innerText=`${currentEnemies[enemyCardIdx].move.damage} 🗡️`
   }
+  if("pierce" in currentEnemies[enemyCardIdx].move)
+  {
+    enemyAction[0].innerText=`${enemyAction[0].innerText} 🛡️❌`
+  }
   if("shield" in currentEnemies[enemyCardIdx].move)
   {
   enemyAction[0].innerText=`${enemyAction[0].innerText} ${currentEnemies[enemyCardIdx].move.shield} 🛡️`
@@ -616,7 +709,9 @@ function endTurn()
 
     currentEnemies.forEach(enemy=>
     {
+      let enemyElementIdx=currentEnemies.indexOf(enemy)
       // console.log(enemy.deck.length)
+      let enemyElement= enemiesElement[enemyElementIdx]
       let enemyMove=enemy.move
 
       if("damage" in enemyMove)
@@ -629,6 +724,8 @@ function endTurn()
           console.log(player.dodge)
           return
         }
+        if(!("pierce" in enemyMove===true))
+        {
         if(player.shield>=0)
         {
           if(enemyMove.damage>player.shield)
@@ -641,11 +738,47 @@ function endTurn()
             player.shield-=enemyMove.damage
           }
         }
+        }
         else
         {
           player.health-=enemyMove.damage
         }
       }
+      if("heal" in enemyMove)
+      {
+          // const enemyIndex = Array.from(enemy.parentElement.children).indexOf(enemy);
+        currentEnemies[enemyElementIdx].health+=enemyMove.heal
+        if(enemy.health>enemy.maxHealth)enemy.health=enemy.maxHealth;
+        enemyElement.querySelector(".enemyCurrentHealth").style.width=`${(currentEnemies[enemyElementIdx].health/currentEnemies[enemyElementIdx].maxHealth)*100}%`
+        enemyElement.querySelector(".enemyHealth").textContent=`${currentEnemies[enemyElementIdx].health}/${currentEnemies[enemyElementIdx].maxHealth}`
+      }
+      if("shield" in enemyMove)
+      {
+        console.log("enemy used a shield")
+        console.log(enemyElement.querySelector(".enemyMaxShield").style)
+        if(enemyElement.querySelector(".enemyMaxShield").classList.contains("hidden"))
+        {
+        enemyElement.querySelector(".enemyMaxShield").classList.remove("hidden")
+        }
+        if(!currentEnemies[enemyElementIdx].shield) currentEnemies[enemyElementIdx].shield=0,currentEnemies[enemyElementIdx].maxShield=0;
+      
+        console.log(currentEnemies[enemyElementIdx].shield)
+        console.log(currentEnemies[enemyElementIdx].maxShield)
+        console.log(enemyElement.querySelector(".enemyMaxShield").style.display)
+        console.log(enemyElement.querySelector(".enemyCurrentShield").style.width)
+
+
+        currentEnemies[enemyElementIdx].shield+=enemyMove.shield
+        if(enemy.shield>enemy.maxShield)enemy.maxShield=enemy.shield;
+        if(enemy.shield<=0)
+        {
+          enemy.maxShield=0
+          enemyElement.querySelector(".enemyMaxShield").classList.add("hidden")
+        }
+        enemyElement.querySelector(".enemyCurrentShield").style.width=`${(currentEnemies[enemyElementIdx].shield/currentEnemies[enemyElementIdx].maxShield)*100}%`
+        enemyElement.querySelector(".enemyShield").textContent=`${currentEnemies[enemyElementIdx].shield}/${currentEnemies[enemyElementIdx].maxShield}`
+      }
+      
     
       // console.log(enemy.name,"enemy used",enemyMove)
     }

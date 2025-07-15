@@ -1,212 +1,320 @@
 //list of available cards
-const cards = 
-[
+const cards = [
   {
     id: 1,
-    name: "Enchanting blood",
-    cost: 7,
+    name: "Blood Surge",
+    cost: 3,
     type: "Power",
     powerup: 2,
-    description: "Doubles the damage of the current deck.",
+    description: "Gain a temporary double damage on current cards.",
     img: "url"
   },
   {
     id: 2,
-    name: "Flame Burst",
+    name: "Crimson Slash",
+    cost: 2,
+    type: "Attack",
+    damage: 6,
+    description: "Deals 6 damage with a vicious red arc.",
+    img: "url"
+  },
+  {
+    id: 3,
+    name: "Sanguine Shield",
+    cost: 2,
+    type: "Defense",
+    shield: 7,
+    description: "Generates 7 shield from hardened blood.",
+    img: "url"
+  },
+  {
+    id: 4,
+    name: "Bloodlust",
+    cost: 1,
+    type: "Power",
+    draw: 2,
+    description: "Draw 2 cards in a rush of frenzy.",
+    img: "url"
+  },
+  {
+    id: 5,
+    name: "Vampiric Grasp",
+    cost: 2,
+    type: "Skill",
+    damage: 3,
+    heal: 3,
+    description: "Deals 3 damage and heals 3 from stolen life.",
+    img: "url"
+  },
+  {
+    id: 6,
+    name: "Pain Focus",
+    cost: 1,
+    type: "Power",
+    draw: 1,
+    description: "Channel your pain to draw 1 extra card.",
+    img: "url"
+  },
+  {
+    id: 7,
+    name: "Blood Needle",
+    cost: 1,
+    type: "Attack",
+    damage: 4,
+    pierce: true,
+    description: "Pierces armor to deal 4 unblockable damage.",
+    img: "url"
+  },
+  {
+    id: 8,
+    name: "Bleeding Wound",
+    cost: 3,
+    type: "Attack",
+    damage: 8,
+    description: "Inflicts a deep slash dealing 8 damage.",
+    img: "url"
+  },
+  {
+    id: 9,
+    name: "Sanguine Mist",
+    cost: 2,
+    type: "Skill",
+    dodge: 2,
+    description: "Evade 2 attacks with a mist of blood.",
+    img: "url"
+  },
+  {
+    id: 10,
+    name: "Vital Echo",
+    cost: 1,
+    type: "Skill",
+    heal: 5,
+    description: "Recover 5 health as your blood steadies.",
+    img: "url"
+  },
+  {
+    id: 11,
+    name: "Crimson Bite",
     cost: 2,
     type: "Attack",
     damage: 5,
-    description: "Deals 5 damage to the enemy.",
+    heal: 2,
+    description: "Deal 5 damage and recover 2 health.",
     img: "url"
   },
   {
-    id: 3,
-    name: "Stone Skin",
-    cost: 3,
+    id: 12,
+    name: "Blood Veil",
+    cost: 2,
     type: "Defense",
-    shield: 8,
-    description: "Adds 8 armor to the player.",
+    shield: 6,
+    description: "Summon a crimson barrier granting 6 shield.",
     img: "url"
   },
   {
-    id: 4,
-    name: "Adrenaline Rush",
-    cost: 1,
-    type: "Power",
-    draw:2,
-    description: "Draw 2 additional cards.",
-    img: "url"
-  },
-  {
-    id: 5,
-    name: "Shadow Step",
-    cost: 1,
-    type: "Skill",
-    dodge:1,
-    description: "Evade the next attack completely.",
-    img: "url"
-  },
-  {
-    id: 6,
-    name: "Piercing Arrow",
+    id: 13,
+    name: "Hemorrhage",
     cost: 2,
     type: "Attack",
-    damage:4,
-    pierce:true,
-    description: "Deals 4 damage that ignores armor.",
+    damage: 6,
+    description: "Tear flesh and deal 6 intense damage.",
     img: "url"
   },
   {
-    id: 7,
-    name: "Healing Touch",
-    cost: 0,
-    type: "Skill",
-    heal: 4,
-    description: "Restores 4 health to the player.",
+    id: 14,
+    name: "Pulse Strike",
+    cost: 2,
+    type: "Attack",
+    damage: 5,
+    description: "Strike with a surge of rhythm for 5 damage.",
     img: "url"
   },
   {
-    id: 8,
-    name: "Blinding Light",
-    cost: 4,
-    type: "Skill",
-    dodge:2,
-    description: "Blinds some enemies, causing them to miss their next 2 attacks.",
-    img: "url"
-  },
-  {
-    id: 9,
-    name: "Berserker Rage",
-    cost: 5,
-    type: "Power",
-    addDamage:4,
-    description: "Gain +4 damage on all attacks.",
-    img: "url"
-  },
-  {
-    id: 10,
-    name: "Ice Shield",
+    id: 15,
+    name: "Blood Mirror",
     cost: 3,
     type: "Defense",
-    shield:5,
-    freeze:1,
-    description: "Adds 5 armor and freezes the next enemy to hit you.",
+    shield: 5,
+    description: "Reflect pain with a 5 shield blood barrier.",
     img: "url"
-  }
+  },
+  {
+  id: 16,
+  name: "Blood Mend",
+  cost: 3,
+  type: "Skill",
+  heal: 7,
+  description: "Restore 7 health to yourself.",
+  img: "url"
+}
 ];
 
-const enemies = 
-[
+
+const enemies = [
   {
     id: 1,
-    name: "Goblin Raider",
-    maxHealth: 10,
-    health: 10,
+    name: "Blood Ghoul",
+    maxHealth: 14,
+    health: 14,
     temper: "aggressive",
-    deck: [1, 2, 5],
+    deck: [2, 7, 13],
     image: "url",
-    move: "",
-    moveId: ""
+    move: {},
+    moveId: null
   },
   {
     id: 2,
-    name: "Cave Troll",
-    maxHealth: 20,
-    health: 20,
-    temper: "defensive",
-    deck: [3, 4, 6],
-    image: "url",
-    move: "",
-    moveId: ""
-  },
-  {
-    id: 3,
-    name: "Skeleton Archer",
-    maxHealth: 8,
-    health: 8,
-    temper: "aggressive",
-    deck: [1, 7, 8],
-    image: "url",
-    move: "",
-    moveId: ""
-  },
-  {
-    id: 4,
-    name: "Dark Mage",
+    name: "Bone Priest",
     maxHealth: 12,
     health: 12,
     temper: "defensive",
-    deck: [9, 10, 2],
+    deck: [3, 10, 15],
     image: "url",
-    move: "",
-    moveId: ""
+    move: {},
+    moveId: null
+  },
+  {
+    id: 3,
+    name: "Flesh Hound",
+    maxHealth: 18,
+    health: 18,
+    temper: "aggressive",
+    deck: [5, 8, 13],
+    image: "url",
+    move: {},
+    moveId: null
+  },
+  {
+    id: 4,
+    name: "Blood Mage",
+    maxHealth: 11,
+    health: 11,
+    temper: "defensive",
+    deck: [3, 11, 12],
+    image: "url",
+    move: {},
+    moveId: null
   },
   {
     id: 5,
-    name: "Orc Warrior",
-    maxHealth: 15,
-    health: 15,
-    temper: "aggressive",
-    deck: [2, 5, 7],
-    image: "url",
-    move: "",
-    moveId: ""
-  },
-  {
-    id: 6,
-    name: "Bandit Leader",
-    maxHealth: 13,
-    health: 13,
-    temper: "aggressive",
-    deck: [1, 3, 8],
-    image: "url",
-    move: "",
-    moveId: ""
-  },
-  {
-    id: 7,
-    name: "Stone Golem",
-    maxHealth: 25,
-    health: 25,
-    temper: "defensive",
-    deck: [4, 6, 9],
-    image: "url",
-    move: "",
-    moveId: ""
-  },
-  {
-    id: 8,
-    name: "Vampire",
-    maxHealth: 11,
-    health: 11,
-    temper: "aggressive",
-    deck: [7, 10, 1],
-    image: "url",
-    move: "",
-    moveId: ""
-  },
-  {
-    id: 9,
-    name: "Necromancer",
-    maxHealth: 14,
-    health: 14,
-    temper: "defensive",
-    deck: [3, 9, 5],
-    image: "url",
-    move: "",
-    moveId: ""
-  },
-  {
-    id: 10,
-    name: "Fire Elemental",
+    name: "Crimson Reaver",
     maxHealth: 16,
     health: 16,
     temper: "aggressive",
-    deck: [4, 6, 10],
+    deck: [2, 7, 14],
     image: "url",
-    move: "",
-    moveId: ""
+    move: {},
+    moveId: null
+  },
+  {
+    id: 6,
+    name: "Vile Butcher",
+    maxHealth: 15,
+    health: 15,
+    temper: "aggressive",
+    deck: [5, 11, 13],
+    image: "url",
+    move: {},
+    moveId: null
+  },
+  {
+    id: 7,
+    name: "Sanguine Warden",
+    maxHealth: 20,
+    health: 20,
+    temper: "defensive",
+    deck: [3, 12, 15],
+    image: "url",
+    move: {},
+    moveId: null
+  },
+  {
+    id: 8,
+    name: "Leech Fiend",
+    maxHealth: 12,
+    health: 12,
+    temper: "aggressive",
+    deck: [5, 10, 11],
+    image: "url",
+    move: {},
+    moveId: null
+  },
+  {
+    id: 9,
+    name: "Blood Cultist",
+    maxHealth: 13,
+    health: 13,
+    temper: "defensive",
+    deck: [3, 5, 8],
+    image: "url",
+    move: {},
+    moveId: null
+  },
+  {
+    id: 10,
+    name: "Skull Templar",
+    maxHealth: 19,
+    health: 19,
+    temper: "defensive",
+    deck: [12, 14, 15],
+    image: "url",
+    move: {},
+    moveId: null
+  },
+  {
+    id: 11,
+    name: "Thirsting Shade",
+    maxHealth: 10,
+    health: 10,
+    temper: "aggressive",
+    deck: [7, 8, 13],
+    image: "url",
+    move: {},
+    moveId: null
+  },
+  {
+    id: 12,
+    name: "Ritual Acolyte",
+    maxHealth: 11,
+    health: 11,
+    temper: "defensive",
+    deck: [3, 10, 12],
+    image: "url",
+    move: {},
+    moveId: null
+  },
+  {
+    id: 13,
+    name: "Carnage Spawn",
+    maxHealth: 14,
+    health: 14,
+    temper: "aggressive",
+    deck: [2, 5, 13],
+    image: "url",
+    move: {},
+    moveId: null
+  },
+  {
+    id: 14,
+    name: "Blood Knight",
+    maxHealth: 17,
+    health: 17,
+    temper: "aggressive",
+    deck: [11, 14, 15],
+    image: "url",
+    move: {},
+    moveId: null
+  },
+  {
+    id: 15,
+    name: "Vessel of Pain",
+    maxHealth: 22,
+    health: 22,
+    temper: "defensive",
+    deck: [3, 10, 12],
+    image: "url",
+    move: {},
+    moveId: null
   }
 ];
-
 export {cards , enemies}
