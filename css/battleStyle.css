@@ -4,7 +4,11 @@
   padding: 0;
 }
 body{
-    background-color: burlywood;
+    background-image: url("../assets/Battle Page Background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:top center;
+    height: 100vh;
 }
 .card,.enemy{
     height: 200px;
@@ -30,9 +34,14 @@ body{
     
 }
 .cardImage{
-    background-color: blueviolet;
+    background-size: cover;background-image: url("../assets/buttons/Grey Button.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:top center;
+    background-position: center;
+    background-repeat: no-repeat;
     width: 100%;
-    height:100px; 
+    height:100%; 
 }
 .cardCost{
     background-color: chartreuse;
@@ -44,7 +53,11 @@ body{
     border: 2px solid black;
 }
 .cardDescription{
-    background-color: crimson;
+    color: aliceblue;
+    background-image: url("../assets/buttons/Red Button.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:top center;
     height: 60px;
     width: 100%;
     overflow: hidden;
@@ -52,19 +65,27 @@ body{
     
 }
 .enemyImage{
-    background-color: blueviolet;
+    /* background-color: blueviolet; */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     width: 100%;
-    height:140px;
+    height:100%;
     
 }
 .enemyCurrentHealth, .enemyCurrentShield
 {
-    background-color: red;  
-    width: 50%;
+    background-image: url("../assets/buttons/Red Button.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:top center;
+    height: 60px;
+    width: 100%; 
+    
     height: 63px; 
 }
 .enemyMaxHealth , .enemyMaxShield{
-    background-color: brown;
+    background-color: rgb(47, 10, 10);
     height: 60px;
     width: 100%;
     overflow: hidden;   
@@ -72,6 +93,7 @@ body{
     position: relative;
 }
 .enemyHealth, .enemyShield{
+    color: aliceblue;
     position: absolute;
     margin-left:10px;
 }
@@ -93,14 +115,18 @@ body{
 .enemyMaxShield
 {
  border: 2px 0 0 0;
- background-color: gray;   
+    background-color: rgb(22, 22, 22);
 }
 .enemyMaxHealth{
 border: 0 0 2px 0;  
 }
 .enemyCurrentShield
 {
-    background-color: lightgrey;
+    background-image: url("../assets/buttons/Grey Button.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:top center;
+    filter: brightness(1.5);
 }
 .enemyAction{
     background-color: crimson;
@@ -133,7 +159,7 @@ border: 0 0 2px 0;
     gap: 10px;
 }
 #maxHealth{
-    background-color: brown;
+    background-color: rgb(90, 22, 22);
     width: 75%;
     height: 30px;
     margin:0 auto;
@@ -143,16 +169,17 @@ border: 0 0 2px 0;
     position: relative;
 }
 #currentHealth{
-    background-color: red;  
+    background-color: rgb(137, 2, 2);  
     width: 100%;
     height: 30px;
 }
 #health{
+    color: aliceblue;
     position: absolute;
     margin-left:10px;
 }
 #maxShield{
-    background-color: gray;
+    background-color: rgb(22, 22, 22);
     width: 75%;
     height: 30px;
     margin:0 auto;
@@ -163,11 +190,12 @@ border: 0 0 2px 0;
     
 }
 #currentShield{
-    background-color: lightgrey;  
+    background-color: rgb(102, 99, 99);  
     width: 100%;
     height: 30px;
 }
 #shield{
+    color: aliceblue;
     position: absolute;
     margin-left:10px;
 }

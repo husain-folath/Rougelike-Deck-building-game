@@ -97,7 +97,7 @@ function createCard(cardId)
 
   const newCardImage=document.createElement("div")
   newCardImage.classList.add("cardImage","cardPart")
-  newCardImage.textContent=newCardInfo.img
+  newCardImage.style.backgroundImage=`url("./assets/cards/${newCardInfo.name}.png")`;
 
   const newCardCost=document.createElement("div")
   newCardCost.classList.add("cardCost","cardPart")
@@ -135,7 +135,7 @@ function createEnemy(enemyId)
 
   const newEnemyImage=document.createElement("div")
   newEnemyImage.classList.add("enemyImage","enemyPart")
-  newEnemyImage.textContent=newEnemyInfo.image
+  newEnemyImage.style.backgroundImage=`url("./assets/enemies/${newEnemyInfo.name}.png")`;
 
   const newEnemyAction=document.createElement("div")
   newEnemyAction.classList.add("enemyAction","enemyPart")

@@ -3,7 +3,11 @@
 }
 
 body{
-    background-color: rgb(243, 34, 76);
+    background-image: url("../assets/Main Page Background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:top center;
+    height:100vh;
 }
 
 #upperBuffer{
@@ -27,7 +31,7 @@ padding: 5px 10px;
     border: 5px solid black;
     margin: 0 auto;
     width: 50%;
-    background-color: aliceblue;
+    max-width: 500px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -35,30 +39,59 @@ padding: 5px 10px;
     gap: 20px;
     padding: 10px;
     border-radius: 15%;
+    background-image: url("../assets/Main Panel Background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:top center;
+
 }
 
 #gameTitle{
-    background-color: aliceblue;
-    color: #a00a28;
+    color: #fc1241;
 }
 
 #easyBtn{
     color: beige;
-    background-color: green;
+    background-image: url("../assets/buttons/Green Button.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:top center;
 }
 #normalBtn{
-    background-color: rgb(255, 191, 0);
+    color: aliceblue;
+    background-image: url("../assets/buttons/Orange Button.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:top center;
 }
 #hardBtn{
-    background-color: red;
+    color: aliceblue;
+    background-image: url("../assets/buttons/Red Button.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:top center;
 }
 #howPlayBtn{
-    background-color: rgb(177, 177, 177);
+    color: aliceblue;
+    background-image: url("../assets/buttons/Grey Button.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:top center;
 }
 #startBtn{
-color:white;
-background-color:navy;
+color: aliceblue;
+background-image: url("../assets/buttons/Blue Button.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:top center;
 }
 #difficulties{
     flex-wrap: wrap;
+}
+#easyBtn:disabled,#normalBtn:disabled,#hardBtn:disabled{
+    color: aliceblue;
+    background-image: url("../assets/buttons/Grey Button.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:top center;
 }
