@@ -157,7 +157,7 @@ const enemies = [
     maxHealth: 14,
     health: 14,
     temper: "aggressive",
-    deck: [2, 7, 13],
+    deck: [2, 5, 7, 13, 3], 
     image: "url",
     move: {},
     moveId: null
@@ -168,7 +168,7 @@ const enemies = [
     maxHealth: 12,
     health: 12,
     temper: "defensive",
-    deck: [3, 10, 15],
+    deck: [3, 10, 15, 13, 16], 
     image: "url",
     move: {},
     moveId: null
@@ -179,7 +179,7 @@ const enemies = [
     maxHealth: 18,
     health: 18,
     temper: "aggressive",
-    deck: [5, 8, 13],
+    deck: [5, 8, 13, 14, 12], 
     image: "url",
     move: {},
     moveId: null
@@ -190,7 +190,7 @@ const enemies = [
     maxHealth: 11,
     health: 11,
     temper: "defensive",
-    deck: [3, 11, 12],
+    deck: [3, 10, 12, 16, 2], 
     image: "url",
     move: {},
     moveId: null
@@ -201,7 +201,7 @@ const enemies = [
     maxHealth: 16,
     health: 16,
     temper: "aggressive",
-    deck: [2, 7, 14],
+    deck: [2, 7, 14, 13, 11], 
     image: "url",
     move: {},
     moveId: null
@@ -212,7 +212,7 @@ const enemies = [
     maxHealth: 15,
     health: 15,
     temper: "aggressive",
-    deck: [5, 11, 13],
+    deck: [5, 8, 11, 13, 3], 
     image: "url",
     move: {},
     moveId: null
@@ -223,7 +223,7 @@ const enemies = [
     maxHealth: 20,
     health: 20,
     temper: "defensive",
-    deck: [3, 12, 15],
+    deck: [3, 12, 15, 16, 2], 
     image: "url",
     move: {},
     moveId: null
@@ -234,7 +234,7 @@ const enemies = [
     maxHealth: 12,
     health: 12,
     temper: "aggressive",
-    deck: [5, 10, 11],
+    deck: [5, 10, 11, 2, 13], 
     image: "url",
     move: {},
     moveId: null
@@ -245,7 +245,7 @@ const enemies = [
     maxHealth: 13,
     health: 13,
     temper: "defensive",
-    deck: [3, 5, 8],
+    deck: [3, 5, 12, 13, 10], 
     image: "url",
     move: {},
     moveId: null
@@ -256,7 +256,7 @@ const enemies = [
     maxHealth: 19,
     health: 19,
     temper: "defensive",
-    deck: [12, 14, 15],
+    deck: [12, 14, 15, 3, 2],
     image: "url",
     move: {},
     moveId: null
@@ -267,7 +267,7 @@ const enemies = [
     maxHealth: 10,
     health: 10,
     temper: "aggressive",
-    deck: [7, 8, 13],
+    deck: [7, 8, 13, 11, 14], 
     image: "url",
     move: {},
     moveId: null
@@ -278,7 +278,7 @@ const enemies = [
     maxHealth: 11,
     health: 11,
     temper: "defensive",
-    deck: [3, 10, 12],
+    deck: [3, 10, 12, 15, 13],
     image: "url",
     move: {},
     moveId: null
@@ -289,7 +289,7 @@ const enemies = [
     maxHealth: 14,
     health: 14,
     temper: "aggressive",
-    deck: [2, 5, 13],
+    deck: [2, 5, 13, 11, 8], 
     image: "url",
     move: {},
     moveId: null
@@ -300,7 +300,7 @@ const enemies = [
     maxHealth: 17,
     health: 17,
     temper: "aggressive",
-    deck: [11, 14, 15],
+    deck: [11, 14, 2, 7, 5], 
     image: "url",
     move: {},
     moveId: null
@@ -311,10 +311,12 @@ const enemies = [
     maxHealth: 22,
     health: 22,
     temper: "defensive",
-    deck: [3, 10, 12],
+    deck: [3, 10, 12, 15, 13], 
     image: "url",
     move: {},
     moveId: null
   }
 ];
+
+
 export {cards , enemies}

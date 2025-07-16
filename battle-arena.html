@@ -10,8 +10,8 @@
     <title>Battle Arena</title>
 </head>
 <body>
-    <header>
-    <h1>The Crimson Gambit</h1>
+    <header id="battleHeader">
+    <h1 id="battleTitle">The Crimson Gambit</h1>
     <button id="quitBtn">Quit</button>
 </header>
 <!-- <div class="enemy">
@@ -37,16 +37,23 @@
         </div>
         <div class="cardDescription">Description Lorem ipsum, dolor sit amet consectetur </div>
     </div> -->
-    
-    
+    <div id="victoryScreen">
+        <h2>YOU WON!!</h2>
+        <div class="buttonPanel">
+        <button id="playAgainBtn">Play Again</button>
+        <button id="endQuitBtn">Quit</button>
+        </div>
+    </div>
     
     <div id="enemiesBelt">
         
     </div>
+    <div id="battleField">
+    </div>
     <div id="cardsBelt">
         
     </div>
-
+    <footer id="playerFooter">
     <div id="playerBars">
     <div id="maxShield"><p id="shield"></p><div id="currentShield"></div></p></div>
     
@@ -55,5 +62,8 @@
     </div>
     <!-- <button id="shuffleDeckBtn">Redraw</button> -->
     <button id="endTurnDeckBtn">END TURN</button>
+    </footer>
+    
+    
 </body>
 </html>

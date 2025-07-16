@@ -23,11 +23,12 @@ let gameState
 
 /*------------------------ Cached Element References ------------------------*/
 const quitBtn= document.getElementById("quitBtn");
+const endQuitBtn= document.getElementById("endQuitBtn");
 // const shuffleDeckBtn= document.getElementById("shuffleDeckBtn");
 const endTurnDeckBtn= document.getElementById("endTurnDeckBtn");
 let enemiesElement=document.querySelectorAll(".enemy")
-
-
+const victoryScreenElement=document.getElementById("victoryScreen")
+const playAgainBtnElement=document.getElementById("playAgainBtn")
 
 
 /*----------------------------- Event Listeners -----------------------------*/
@@ -37,10 +38,15 @@ quitBtn.addEventListener("click", ()=>
     window.location.href="index.html";
   })
 
+endQuitBtn.addEventListener("click", ()=>
+  {
+    window.location.href="index.html";
+  })
+
   // shuffleDeckBtn.addEventListener("click", createPlayerdeck)
   endTurnDeckBtn.addEventListener("click", endTurn)
   
-
+  playAgainBtnElement.addEventListener("click", init)
   
   
   
@@ -48,9 +54,12 @@ quitBtn.addEventListener("click", ()=>
 /*-------------------------------- Functions --------------------------------*/
 
 function init(){
+  victoryScreenElement.classList.add("hidden")
+  player.maxHealth=40
   player.maxHealth-=10*difficulty
   player.health=player.maxHealth
   gameState="battle"
+  removeAllEnemies()
   updatePlayerBars()
   createPlayerdeck()
   createEnemyTeam()
@@ -241,7 +250,7 @@ function createPlayerdeck() {
   currentCards=[]
   player.deck = [];
   removeAllCards()
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 5; i++) {
     // Refill unusedDeck if it's empty
     if (player.unusedDeck.length === 0) {
       // console.log("Refilling unusedDeck from usedDeck");
@@ -329,7 +338,7 @@ function createEnemyTeam()
     let newEnemyIdx=Math.ceil(Math.random()*enemies.length)
     console.log(newEnemyIdx)
     createEnemy(newEnemyIdx)
-    currentEnemies[i]=enemies.find(enemy=>enemy.id===(newEnemyIdx))
+    currentEnemies[i]=structuredClone(enemies.find(enemy=>enemy.id===(newEnemyIdx)))
   }
   // console.log(currentEnemies)
   enemiesElement = [...document.querySelectorAll(".enemy")];
@@ -640,7 +649,12 @@ function removeAllCards()
   
   playerCardsElement.forEach(card=> card.remove())
 }
-
+function removeAllEnemies()
+{
+  enemiesElement = [...document.getElementsByClassName("enemy")];
+  
+  enemiesElement.forEach(enemy=> enemy.remove())
+}
 function selectEnemyMove()
 {
   enemiesElement = [...document.querySelectorAll(".enemy")];
@@ -806,13 +820,17 @@ function checkGameState()
     {
       // console.log("You WOOOOOOOOON!!!!!!")
       gameState="victory"
+      victoryScreenElement.classList.remove("hidden")
+      victoryScreenElement.querySelector("h2").textContent="You Won!!"
+
       // window.alert("Won.")
     }
   }
   else if(gameState==="defeat")
   {
   //  console.log("You loooost!!!!!!")
-   window.alert("lost.")
+    victoryScreenElement.classList.remove("hidden")
+    victoryScreenElement.querySelector("h2").textContent="You Lost :(."
   }
 }
 init()

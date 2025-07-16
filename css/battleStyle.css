@@ -4,6 +4,7 @@
   padding: 0;
 }
 body{
+    position: relative;
     background-image: url("../assets/Battle Page Background.png");
     background-size: cover;
     background-repeat: no-repeat;
@@ -27,7 +28,11 @@ body{
 
 .cardName, .enemyName{
     box-sizing: border-box;
-    background-color: aqua;
+    color: aliceblue;
+    background-image: url("../assets/buttons/Grey Button.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:top center;
     width: 100%;   
     height: 30px;
     
@@ -44,7 +49,11 @@ body{
     height:100%; 
 }
 .cardCost{
-    background-color: chartreuse;
+    color: aliceblue;
+    background-image: url("../assets/buttons/Orange Button.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:top center;
     height: 30px;
     width: 30px;
     position: absolute;
@@ -54,7 +63,8 @@ body{
 }
 .cardDescription{
     color: aliceblue;
-    background-image: url("../assets/buttons/Red Button.png");
+    /* padding: 5px; */
+    background-image: url("../assets/buttons/Blue Button.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position:top center;
@@ -65,7 +75,7 @@ body{
     
 }
 .enemyImage{
-    /* background-color: blueviolet; */
+    background-color: black;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -129,7 +139,11 @@ border: 0 0 2px 0;
     filter: brightness(1.5);
 }
 .enemyAction{
-    background-color: crimson;
+    color: aliceblue;
+    background-image: url("../assets/buttons/Orange Button.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     position: absolute;
     top: 20px;
     right: -65px;
@@ -153,6 +167,9 @@ border: 0 0 2px 0;
 .cardId,.enemyId{
     display: none;
 }
+#playerFooter{
+    position: relative;
+}
 #playerBars{
     display: flex;
     flex-direction: column;
@@ -169,7 +186,7 @@ border: 0 0 2px 0;
     position: relative;
 }
 #currentHealth{
-    background-color: rgb(137, 2, 2);  
+    background-color: rgb(1, 70, 1);  
     width: 100%;
     height: 30px;
 }
@@ -207,9 +224,85 @@ border: 0 0 2px 0;
  margin: 100px 0 20px 0;
 }
 #cardsBelt,#enemiesBelt
-{
+{   
     height: 200px;
 }
-.hidden{
- display: none;
+#battleHeader{
+    position: relative;
+    height: 70px;
 }
+#quitBtn,#endQuitBtn,#endTurnDeckBtn,#playAgainBtn{
+    color: aliceblue;
+    background-image: url("../assets/buttons/Grey Button.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+#quitBtn{
+    position: absolute;
+    right: 15px;
+    top: 5px;
+}
+#endTurnDeckBtn{
+    position: absolute;
+    right: 15px;
+    top: 3px;
+}
+#battleTitle{
+    color:crimson;
+    justify-self: center;
+    margin-top: 15px;
+    
+}
+#victoryScreen>.buttonPanel> #endQuitBtn,#victoryScreen>.buttonPanel> #playAgainBtn{
+
+    padding: 10px;
+    position:initial;
+    
+   
+}
+h2{
+    color:crimson;
+    justify-self: center;
+    margin-top: 15px;
+}
+#victoryScreen{
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    justify-content: center;
+    display: block;
+    position: absolute;
+    color: aliceblue;
+    border: 5px solid black;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    height: 30%;
+    max-width: 500px;
+    border-radius: 15%;
+    background-image: url("../assets/Main Panel Background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position:top center;
+    padding: 50px;
+    
+}
+.buttonPanel{
+    margin-top: 50px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    
+}
+.hidden{
+ display: none !important;
+}
+    /* @media (min-height:70){
+#battleField{
+    height: 10vh;
+    
+}
+} */
