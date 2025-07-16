@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/mainStyle.css">
     <script type="module" defer src="./js/mainScript.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Limelight&family=Londrina+Shadow&family=Manufacturing+Consent&family=Metal+Mania&family=Pinyon+Script&family=Ribeye&display=swap" rel="stylesheet">
     <title>The Crimson Gambit</title>
 </head>
 <body>
@@ -16,7 +19,7 @@
         <h1 id="gameTitle">The Crimson Gambit</h1>
         
         <div>
-            <button id="howPlayBtn">How to play</button>
+            <button id="howToPlayBtn">How to play</button>
         </div>   
 
         <div id="difficulties">    
@@ -27,6 +30,12 @@
 
         </div>
         <button id="startBtn">Start</button>
+    </div>
+
+    <div id="howToPlayScreen" class="hidden">
+        <h2>How to play</h2>
+        <img id="howToPlayImage" src="./assets/How to Play.png" alt="">
+        <button id="backBtn">Back</button>
     </div>
 </body>
 </html>

@@ -5,7 +5,10 @@ let difficulty=0
 const easyBtn= document.getElementById("easyBtn") 
 const normalBtn= document.getElementById("normalBtn") 
 const hardBtn= document.getElementById("hardBtn") 
+const howToPlayBtn= document.getElementById("howToPlayBtn") 
+const backBtn= document.getElementById("backBtn") 
 
+const howToPlayScreenElement=document.getElementById("howToPlayScreen") 
 normalBtn.disabled=true;
 
 const difficultyBtns=[easyBtn,normalBtn,hardBtn]
@@ -39,7 +42,23 @@ startBtn.addEventListener
         window.location.href="battle-arena.html";
     }
 )
-    
+   
+howToPlayBtn.addEventListener
+(
+    "click", ()=>
+    {
+        console.log("hello")
+        howToPlayScreenElement.classList.remove("hidden")
+    }
+)
+backBtn.addEventListener
+(
+    "click", ()=>
+    {
+        console.log("hello")
+        howToPlayScreenElement.classList.add("hidden")
+    }
+)
     // easyBtn.addEventListener("click", event=>
     // {
     //     document.querySelectorAll("button").forEach(button =>button.disabled=false)

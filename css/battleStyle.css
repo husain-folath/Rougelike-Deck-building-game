@@ -10,6 +10,7 @@ body{
     background-repeat: no-repeat;
     background-position:top center;
     height: 100vh;
+    font-family: "Metal Mania", system-ui;
 }
 .card,.enemy{
     height: 200px;
@@ -39,7 +40,7 @@ body{
     
 }
 .cardImage{
-    background-size: cover;background-image: url("../assets/buttons/Grey Button.png");
+    background-image: url("../assets/buttons/Grey Button.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position:top center;
@@ -160,7 +161,7 @@ border: 0 0 2px 0;
     box-sizing: border-box;
     position: relative;
     width: 100%;
-    background-color: blueviolet;
+    background-color: black;
     height: 110px;
     overflow: hidden;
 }
