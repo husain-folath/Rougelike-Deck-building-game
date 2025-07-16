@@ -1,72 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/mainStyle.css">
-    <link rel="stylesheet" href="./css/battleStyle.css">
-    <script type="module" src="./js/data.js"></script>
-    <script type="module" src="./js/battleScript.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Limelight&family=Londrina+Shadow&family=Manufacturing+Consent&family=Metal+Mania&family=Pinyon+Script&family=Ribeye&display=swap" rel="stylesheet">
-    <title>Battle Arena</title>
-</head>
-<body>
-    <header id="battleHeader">
-    <h1 id="battleTitle">The Crimson Gambit</h1>
-    <button id="quitBtn">Quit</button>
-</header>
-<!-- <div class="enemy">
-    <div class="enemyName">Name</div>
-    <div class="enemyImage">Url</div>
-    <div class="enemyMaxHealth">
-            <p class="enemyHealth">20/40</p>
-            <div class="enemyCurrentHealth"></div>
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        <link rel="stylesheet" href="./css/mainStyle.css">
+        <link rel="stylesheet" href="./css/battleStyle.css">
+    
+        <script type="module" src="./js/data.js"></script>
+        <script type="module" src="./js/battleScript.js"></script>
+    
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Limelight&family=Londrina+Shadow&family=Manufacturing+Consent&family=Metal+Mania&family=Pinyon+Script&family=Ribeye&display=swap" rel="stylesheet">
+    
+        <title>Battle Arena</title>
+    
+    </head>
+
+    <body>
+
+        <header id="battleHeader">
+
+            <h1 id="battleTitle">The Crimson Gambit</h1>
+            <button id="quitBtn">Quit</button>
+    
+        </header>
+
+        <div id="endScreen" class="hidden">
+
+            <h2>YOU WON!!</h2>
+
+            <div class="buttonPanel">
+
+                <button id="playAgainBtn">Play Again</button>
+                <button id="endQuitBtn">Quit</button>
+
+            </div>
         </div>
-    <div class="enemyMaxShield">
-            <p class="enemyShield">20/40</p>
-            <div class="enemyCurrentShield"></div>
+    
+        <div id="enemiesBelt">
         </div>
-        
-        <div class="enemyAction"> 5 🗡️</div>
-        
-    </div>  -->
-    <!-- <div class="card ">
-        <div class="cardName">Name</div>
-        <div class="cardMid">
-            <img class="cardImage" src="./assets/cards/Bleeding Wound.png">
-            <div class="cardCost">Cost</div>
+
+        <div id="battleField">
         </div>
-        <div class="cardDescription">Description Lorem ipsum, dolor sit amet consectetur </div>
-    </div> -->
-    <div id="victoryScreen" class="hidden">
-        <h2>YOU WON!!</h2>
-        <div class="buttonPanel">
-        <button id="playAgainBtn">Play Again</button>
-        <button id="endQuitBtn">Quit</button>
+
+        <div id="cardsBelt">
         </div>
-    </div>
-    
-    <div id="enemiesBelt">
-        
-    </div>
-    <div id="battleField">
-    </div>
-    <div id="cardsBelt">
-        
-    </div>
-    <footer id="playerFooter">
-    <div id="playerBars">
-    <div id="maxShield"><p id="shield"></p><div id="currentShield"></div></p></div>
+
+        <footer id="playerFooter">
+
+            <div id="playerBars">
+                <div id="maxShield">
+
+                    <p id="shield"></p>
+                    <div id="currentShield"></div>
+
+                </div>
     
     
-    <div id="maxHealth"><div id="currentHealth"></div><p id="health"></p></div>
-    </div>
-    <!-- <button id="shuffleDeckBtn">Redraw</button> -->
-    <button id="endTurnDeckBtn">END TURN</button>
-    </footer>
+                <div id="maxHealth">
+
+                    <div id="currentHealth"></div>
+                    <p id="health"></p>
+
+                </div>
+            </div>
+
+            <button id="endTurnDeckBtn">END TURN</button>
+
+        </footer>
     
     
-</body>
+    </body>
 </html>

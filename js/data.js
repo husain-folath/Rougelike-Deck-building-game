@@ -1,4 +1,3 @@
-//list of available cards
 const cards = [
   {
     id: 1,
@@ -7,7 +6,7 @@ const cards = [
     type: "Power",
     powerup: 2,
     description: "Gain a temporary double damage on current cards.",
-    img: "url"
+    alt: "A glowing blood rune surging with red energy."
   },
   {
     id: 2,
@@ -16,7 +15,7 @@ const cards = [
     type: "Attack",
     damage: 6,
     description: "Deals 6 damage with a vicious red arc.",
-    img: "url"
+    alt: "A sharp red slash cutting across a dark backdrop."
   },
   {
     id: 3,
@@ -25,7 +24,7 @@ const cards = [
     type: "Defense",
     shield: 7,
     description: "Generates 7 shield from hardened blood.",
-    img: "url"
+    alt: "A circular shield made of solidified blood."
   },
   {
     id: 4,
@@ -34,7 +33,7 @@ const cards = [
     type: "Power",
     draw: 2,
     description: "Draw 2 cards in a rush of frenzy.",
-    img: "url"
+    alt: "Eyes glowing with madness and blood trails."
   },
   {
     id: 5,
@@ -44,7 +43,7 @@ const cards = [
     damage: 3,
     heal: 3,
     description: "Deals 3 damage and heals 3 from stolen life.",
-    img: "url"
+    alt: "A ghostly hand draining life from a crimson victim."
   },
   {
     id: 6,
@@ -53,7 +52,7 @@ const cards = [
     type: "Power",
     draw: 1,
     description: "Channel your pain to draw 1 extra card.",
-    img: "url"
+    alt: "A clenched face framed in red aura and inner turmoil."
   },
   {
     id: 7,
@@ -63,7 +62,7 @@ const cards = [
     damage: 4,
     pierce: true,
     description: "Pierces armor to deal 4 unblockable damage.",
-    img: "url"
+    alt: "A thin blood-coated needle flying through steel."
   },
   {
     id: 8,
@@ -72,7 +71,7 @@ const cards = [
     type: "Attack",
     damage: 8,
     description: "Inflicts a deep slash dealing 8 damage.",
-    img: "url"
+    alt: "A wide-open gash pouring blood across dark fabric."
   },
   {
     id: 9,
@@ -81,7 +80,7 @@ const cards = [
     type: "Skill",
     dodge: 2,
     description: "Evade 2 attacks with a mist of blood.",
-    img: "url"
+    alt: "A red mist swirling like a spectral veil."
   },
   {
     id: 10,
@@ -90,7 +89,7 @@ const cards = [
     type: "Skill",
     heal: 5,
     description: "Recover 5 health as your blood steadies.",
-    img: "url"
+    alt: "Echo waves pulsing from a beating heart."
   },
   {
     id: 11,
@@ -100,7 +99,7 @@ const cards = [
     damage: 5,
     heal: 2,
     description: "Deal 5 damage and recover 2 health.",
-    img: "url"
+    alt: "Fangs dripping blood from a fresh wound."
   },
   {
     id: 12,
@@ -109,7 +108,7 @@ const cards = [
     type: "Defense",
     shield: 6,
     description: "Summon a crimson barrier granting 6 shield.",
-    img: "url"
+    alt: "A magical red veil shimmering with protective runes."
   },
   {
     id: 13,
@@ -118,7 +117,7 @@ const cards = [
     type: "Attack",
     damage: 6,
     description: "Tear flesh and deal 6 intense damage.",
-    img: "url"
+    alt: "Dark claws raking through muscle with brutal force."
   },
   {
     id: 14,
@@ -127,7 +126,7 @@ const cards = [
     type: "Attack",
     damage: 5,
     description: "Strike with a surge of rhythm for 5 damage.",
-    img: "url"
+    alt: "A pulsating blade striking to the rhythm of a heartbeat."
   },
   {
     id: 15,
@@ -136,18 +135,19 @@ const cards = [
     type: "Defense",
     shield: 5,
     description: "Reflect pain with a 5 shield blood barrier.",
-    img: "url"
+    alt: "A glowing red mirror crackling with reflected damage."
   },
   {
-  id: 16,
-  name: "Blood Mend",
-  cost: 3,
-  type: "Skill",
-  heal: 7,
-  description: "Restore 7 health to yourself.",
-  img: "url"
-}
+    id: 16,
+    name: "Blood Mend",
+    cost: 3,
+    type: "Skill",
+    heal: 7,
+    description: "Restore 7 health to yourself.",
+    alt: "A hand stitching together with threads of blood."
+  }
 ];
+
 
 
 const enemies = [
@@ -157,10 +157,10 @@ const enemies = [
     maxHealth: 14,
     health: 14,
     temper: "aggressive",
-    deck: [2, 5, 7, 13, 3], 
-    image: "url",
+    deck: [2, 5, 7, 13, 3],
     move: {},
-    moveId: null
+    moveId: null,
+    alt: "A hunched, pale creature with torn flesh and glowing red eyes."
   },
   {
     id: 2,
@@ -168,10 +168,10 @@ const enemies = [
     maxHealth: 12,
     health: 12,
     temper: "defensive",
-    deck: [3, 10, 15, 13, 16], 
-    image: "url",
+    deck: [3, 10, 15, 13, 16],
     move: {},
-    moveId: null
+    moveId: null,
+    alt: "A skeletal cultist in tattered robes clutching a ritual staff."
   },
   {
     id: 3,
@@ -179,10 +179,10 @@ const enemies = [
     maxHealth: 18,
     health: 18,
     temper: "aggressive",
-    deck: [5, 8, 13, 14, 12], 
-    image: "url",
+    deck: [5, 8, 13, 14, 12],
     move: {},
-    moveId: null
+    moveId: null,
+    alt: "A quadrupedal beast with sinewy muscles and bloodied fangs."
   },
   {
     id: 4,
@@ -190,10 +190,10 @@ const enemies = [
     maxHealth: 11,
     health: 11,
     temper: "defensive",
-    deck: [3, 10, 12, 16, 2], 
-    image: "url",
+    deck: [3, 10, 12, 16, 2],
     move: {},
-    moveId: null
+    moveId: null,
+    alt: "A dark-robed mage channeling crimson energy through a blood sigil."
   },
   {
     id: 5,
@@ -201,10 +201,10 @@ const enemies = [
     maxHealth: 16,
     health: 16,
     temper: "aggressive",
-    deck: [2, 7, 14, 13, 11], 
-    image: "url",
+    deck: [2, 7, 14, 13, 11],
     move: {},
-    moveId: null
+    moveId: null,
+    alt: "A towering warrior with a blood-streaked axe and spiked armor."
   },
   {
     id: 6,
@@ -212,10 +212,10 @@ const enemies = [
     maxHealth: 15,
     health: 15,
     temper: "aggressive",
-    deck: [5, 8, 11, 13, 3], 
-    image: "url",
+    deck: [5, 8, 11, 13, 3],
     move: {},
-    moveId: null
+    moveId: null,
+    alt: "A rotund, gore-covered figure wielding cleavers and meat hooks."
   },
   {
     id: 7,
@@ -223,10 +223,10 @@ const enemies = [
     maxHealth: 20,
     health: 20,
     temper: "defensive",
-    deck: [3, 12, 15, 16, 2], 
-    image: "url",
+    deck: [3, 12, 15, 16, 2],
     move: {},
-    moveId: null
+    moveId: null,
+    alt: "An armored sentinel with a crimson shield glowing with runes."
   },
   {
     id: 8,
@@ -234,10 +234,10 @@ const enemies = [
     maxHealth: 12,
     health: 12,
     temper: "aggressive",
-    deck: [5, 10, 11, 2, 13], 
-    image: "url",
+    deck: [5, 10, 11, 2, 13],
     move: {},
-    moveId: null
+    moveId: null,
+    alt: "A twisted parasite humanoid with a long tongue and draining claws."
   },
   {
     id: 9,
@@ -245,10 +245,10 @@ const enemies = [
     maxHealth: 13,
     health: 13,
     temper: "defensive",
-    deck: [3, 5, 12, 13, 10], 
-    image: "url",
+    deck: [3, 5, 12, 13, 10],
     move: {},
-    moveId: null
+    moveId: null,
+    alt: "A hooded figure chanting in blood circles with trembling hands."
   },
   {
     id: 10,
@@ -257,9 +257,9 @@ const enemies = [
     health: 19,
     temper: "defensive",
     deck: [12, 14, 15, 3, 2],
-    image: "url",
     move: {},
-    moveId: null
+    moveId: null,
+    alt: "A heavily armored knight with a skull-shaped helmet and crimson insignia."
   },
   {
     id: 11,
@@ -267,10 +267,10 @@ const enemies = [
     maxHealth: 10,
     health: 10,
     temper: "aggressive",
-    deck: [7, 8, 13, 11, 14], 
-    image: "url",
+    deck: [7, 8, 13, 11, 14],
     move: {},
-    moveId: null
+    moveId: null,
+    alt: "A ghostly, gray specter with red eyes and clawed wisps of fog trailing behind."
   },
   {
     id: 12,
@@ -279,9 +279,9 @@ const enemies = [
     health: 11,
     temper: "defensive",
     deck: [3, 10, 12, 15, 13],
-    image: "url",
     move: {},
-    moveId: null
+    moveId: null,
+    alt: "A trembling youth with blood-smeared scrolls and wide, fanatical eyes."
   },
   {
     id: 13,
@@ -289,10 +289,10 @@ const enemies = [
     maxHealth: 14,
     health: 14,
     temper: "aggressive",
-    deck: [2, 5, 13, 11, 8], 
-    image: "url",
+    deck: [2, 5, 13, 11, 8],
     move: {},
-    moveId: null
+    moveId: null,
+    alt: "A grotesque mutant born of war, covered in spikes and raw muscle."
   },
   {
     id: 14,
@@ -300,10 +300,10 @@ const enemies = [
     maxHealth: 17,
     health: 17,
     temper: "aggressive",
-    deck: [11, 14, 2, 7, 5], 
-    image: "url",
+    deck: [11, 14, 2, 7, 5],
     move: {},
-    moveId: null
+    moveId: null,
+    alt: "A dark paladin with a crimson blade and glowing sigils on black armor."
   },
   {
     id: 15,
@@ -311,10 +311,10 @@ const enemies = [
     maxHealth: 22,
     health: 22,
     temper: "defensive",
-    deck: [3, 10, 12, 15, 13], 
-    image: "url",
+    deck: [3, 10, 12, 15, 13],
     move: {},
-    moveId: null
+    moveId: null,
+    alt: "A hulking figure bound in chains, bleeding endlessly but never falling."
   }
 ];
 

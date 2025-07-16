@@ -1,9 +1,11 @@
-*{
+*
+{
     margin:0;
 }
 
-body{
-    background-image: url("../assets/Main Page Background.png");
+body
+{
+    background-image: url("../assets/backgrounds/Main Page Background.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position:top center;
@@ -12,24 +14,27 @@ body{
     font-family: "Metal Mania", system-ui;
 }
 
-#upperBuffer{
-
+#upperBuffer
+{
     height: 200px;
 }
 
-div{
+div
+{
     display: flex;  
     justify-content: space-around;
     align-items: center;
     gap: 10px;
 }
 
-button{
-border-radius: 15%;
-padding: 5px 10px;
+button
+{
+    border-radius: 15%;
+    padding: 5px 10px;
 }
 
-#mainPagePanel{
+#mainPagePanel
+{
     border: 5px solid black;
     margin: 0 auto;
     width: 50%;
@@ -41,63 +46,78 @@ padding: 5px 10px;
     gap: 20px;
     padding: 10px;
     border-radius: 15%;
-    background-image: url("../assets/Main Panel Background.png");
+    background-image: url("../assets/backgrounds/Main Panel Background.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position:top center;
-
 }
 
-#gameTitle{
+#gameTitle
+{
     color: #fc1241;
 }
 
-#easyBtn{
+#easyBtn
+{
     color: beige;
     background-image: url("../assets/buttons/Green Button.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position:top center;
 }
-#normalBtn{
+
+#normalBtn
+{
     color: aliceblue;
     background-image: url("../assets/buttons/Orange Button.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position:top center;
 }
-#hardBtn{
+
+#hardBtn
+{
     color: aliceblue;
     background-image: url("../assets/buttons/Red Button.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position:top center;
 }
-#howToPlayBtn,#backBtn{
+
+#howToPlayBtn,#backBtn
+{
     color: aliceblue;
     background-image: url("../assets/buttons/Grey Button.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position:top center;
 }
-#startBtn{
-color: aliceblue;
-background-image: url("../assets/buttons/Blue Button.png");
+
+#startBtn
+{
+    color: aliceblue;
+    background-image: url("../assets/buttons/Blue Button.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position:top center;
 }
-#difficulties{
+
+#difficulties
+{
     flex-wrap: wrap;
 }
-#easyBtn:disabled,#normalBtn:disabled,#hardBtn:disabled{
+
+#easyBtn:disabled,#normalBtn:disabled,#hardBtn:disabled
+{
     color: aliceblue;
     background-image: url("../assets/buttons/Grey Button.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position:top center;
 }
-#howToPlayScreen{
+
+#howToPlayScreen
+{
     color: crimson;
     background-color: rgba(0,0,0,0.7);
     display: flex;
@@ -112,10 +132,14 @@ background-image: url("../assets/buttons/Blue Button.png");
     border: solid grey;
     border-radius: 15%;
 }
-#howToPlayImage{
+
+#howToPlayImage
+{
     width:70vw;
     border: 3px solid grey;
 }
-.hidden{
- display: none !important;
+
+.hidden
+{
+    display: none !important;
 }

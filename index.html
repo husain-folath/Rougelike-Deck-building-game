@@ -1,41 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/mainStyle.css">
-    <script type="module" defer src="./js/mainScript.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Limelight&family=Londrina+Shadow&family=Manufacturing+Consent&family=Metal+Mania&family=Pinyon+Script&family=Ribeye&display=swap" rel="stylesheet">
-    <title>The Crimson Gambit</title>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <div id="upperBuffer"></div>
+        <link rel="stylesheet" href="./css/mainStyle.css">
 
-    <div id="mainPagePanel">
-
-        <h1 id="gameTitle">The Crimson Gambit</h1>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Limelight&family=Londrina+Shadow&family=Manufacturing+Consent&family=Metal+Mania&family=Pinyon+Script&family=Ribeye&display=swap" rel="stylesheet">
         
-        <div>
-            <button id="howToPlayBtn">How to play</button>
-        </div>   
+        <script type="module" defer src="./js/mainScript.js"></script>
 
-        <div id="difficulties">    
+        <title>The Crimson Gambit</title>
+    </head>
+    <body>
+
+        <div id="upperBuffer"></div>
+
+        <div id="mainPagePanel">
+
+            <h1 id="gameTitle">The Crimson Gambit</h1>
+        
+            <div>
+                <button id="howToPlayBtn">How to play</button>
+            </div>   
+
+            <div id="difficulties">    
             
-            <button id="easyBtn">Easy</button>
-            <button id="normalBtn">Normal</button>
-            <button id="hardBtn">Hard</button>
+                <button id="easyBtn">Easy</button>
+                <button id="normalBtn">Normal</button>
+                <button id="hardBtn">Hard</button>
 
+            </div>
+            <button id="startBtn">Start</button>
         </div>
-        <button id="startBtn">Start</button>
-    </div>
 
-    <div id="howToPlayScreen" class="hidden">
-        <h2>How to play</h2>
-        <img id="howToPlayImage" src="./assets/How to Play.png" alt="">
-        <button id="backBtn">Back</button>
-    </div>
-</body>
+        <div id="howToPlayScreen" class="hidden">
+
+            <h2>How to play</h2>
+            
+            <img id="howToPlayImage" src="./assets/backgrounds/How to Play.png" alt="Tutorial screen showing labeled elements of the battle UI, including player health and shield, cards with descriptions and health cost, enemy stats and intentions, a quit button, and an end turn button.">
+            
+            <button id="backBtn">Back</button>
+        </div>
+    </body>
 </html>

@@ -1,14 +1,8 @@
+
+## 🕹️ Game Name: *[The Crimson Gambit]*
 # Roguelike Deck Builder Game
 
 
-### Home Page
-## ![a prototype of how home page should look like.](assets/Home-page-draft.png)
-### Battle Page
-## ![a prototype of how main battle page should look like](assets/Battle-page-draft.png)
-
----
-
-## 🕹️ Game Name: *[The Crimson Gambit]*
 
 A **roguelike deck-building game** where players sacrifice **health to play powerful cards**. The game is inspired by titles like *Slay the Spire*, but introduces a risk-reward system where managing your HP is as important as managing your deck.
 
@@ -21,31 +15,35 @@ This concept explores the emotional and tactical weight of sacrificing your own 
 
 ## 🚀 Getting Started
 
-- **Play the Game:** A link to the deployed game will be provided.
-- **How to Play:** The game will include a "How to Play" button on the main menu explaining all mechanics.
+- **Play the Game:** The [Link](https://the-crimson-gambit.surge.sh/index.html) to the game.
+- **How to Play:** The game includes a "How to Play" button on the main menu explaining all mechanics.
 - **Planning Materials:**
 [draw.io](https://app.diagrams.net/#G1PyYV1US6-spDXPjkXFD70WIm6NSI6zyb#%7B%22pageId%22%3A%22N-C6wULLYs8-NzSbLSXE%22%7D) was used for the wireframe.
 [Trello](https://trello.com/b/vqoMt1D0/rougelike-deck-builder-game) was used for time and task management. 
 
----
+### Home Page Initial Design
+## ![a prototype of how home page should look like.](assets/backgrounds/Home-page-draft.png)
+
+### Home Page Final Design
+## ![The current design of the home page.](assets/backgrounds/home-Page-Final-Design.png)
+
+### Battle Page Initial Design
+## ![a prototype of how main battle page should look like](assets/backgrounds/Battle-page-draft.png)
+
+### Battle Page Final Design
+## ![The current design of the battle page.](assets/backgrounds/battle-Page-Final-Design.png)
 
 ## 🧠 Game Design Plan
 
 ### 🎮 Game Features
 
 - Difficulty Modes: Easy, Normal, Hard
-- AI Difficulty Selection
-- Difficulty affects card damage, cost, or effects
+- Difficulty affects card cost
 - Core Game Loop:  
   `Start Match → Draw Phase → Play Phase → Enemy Phase → End Turn → Check Win/Loss`
 - Game States:  
-  `Main Menu`, `Battle`, `Victory`, `Defeat`, `Pause`
-- UI/UX Enhancements:
-  - Card play animations: fade, glow, shake
-  - Visual effects for damage, healing, and shielding
-  - Floating text for damage numbers and status effects
-  - Tooltips on hover for cards and enemies
-  - Action log (e.g., “You played Blood Blade: -5 HP, 20 damage”)
+  `Main Menu`, `Battle`, `Victory`, `Defeat`
+
 
 ---
 
@@ -56,16 +54,16 @@ Cards will be stored in an array of objects:
 ```js
 let Cards = [card1, card2, card3];
 
-let card = {
-  ID: 1,
-  name: "Enchanting Blood",
-  cost: 3,
-  type: "Power",
-  effect: "nextDamage * 2",
-  description: "Doubles the next instance of damage.",
-  rarity: "Rare",
-  img: "url"
-};
+let card ={
+
+    id: 1,
+    name: "Blood Surge",
+    cost: 3,
+    type: "Power",
+    powerup: 2,
+    description: "Gain a temporary double damage on current cards.",
+    alt: "A glowing blood rune surging with red energy."
+  }
 ```
 ## 🃏 Card Attributes
 
@@ -75,15 +73,12 @@ let card = {
 - **Type**
 - **Effect**
 - **Description**
-- **Image**
-- **Rarity**
+- **Alt**
 
 ### Card Types May Include:
 - Attack  
 - Skill  
 - Power  
-- Curse  
-- Status  
 
 > Once the player loses, no further actions should be allowed.
 
@@ -105,13 +100,17 @@ Enemy cards function similarly to player cards.
 ```js
 let enemies = [enemy1, enemy2, enemy3];
 
-let Enemy = {
-  ID: 1,
-  name: "John Cena",
-  Deck: [1, 2, 3],
-  health: 50,
-  img: "url"
-};
+let Enemy =  {
+    id: 1,
+    name: "Blood Ghoul",
+    maxHealth: 14,
+    health: 14,
+    temper: "aggressive",
+    deck: [2, 5, 7, 13, 3],
+    move: {},
+    moveId: null,
+    alt: "A hunched, pale creature with torn flesh and glowing red eyes."
+  }
 ```
 ## 🤖 Enemy AI Behavior
 
@@ -121,8 +120,7 @@ let Enemy = {
 ### AI Behavior Types
 
 - **Aggressive:** Focuses on high damage  
-- **Defensive:** Uses buffs or shields  
-- **Mixed:** Follows patterns (e.g., attack → debuff → block)
+- **Defensive:** Uses heals or shields  
 
 ---
 

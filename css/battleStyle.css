@@ -1,18 +1,22 @@
-* {
+* 
+{
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-body{
+
+body
+{
     position: relative;
-    background-image: url("../assets/Battle Page Background.png");
+    background-image: url("../assets/backgrounds/Battle Page Background.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position:top center;
     height: 100vh;
     font-family: "Metal Mania", system-ui;
 }
-.card,.enemy{
+.card,.enemy
+{
     height: 200px;
     width: 141px;
     gap: 0;
@@ -22,12 +26,14 @@ body{
     margin: 0 auto;
     border: 3px solid black;
 }
-.card>*,.enemy>*{
-    border: 2px solid black;
-    
+
+.card>*,.enemy>*
+{
+    border: 2px solid black; 
 }
 
-.cardName, .enemyName{
+.cardName, .enemyName
+{
     box-sizing: border-box;
     color: aliceblue;
     background-image: url("../assets/buttons/Grey Button.png");
@@ -39,7 +45,9 @@ body{
     
     
 }
-.cardImage{
+
+.cardImage
+{
     background-image: url("../assets/buttons/Grey Button.png");
     background-size: cover;
     background-repeat: no-repeat;
@@ -49,7 +57,9 @@ body{
     width: 100%;
     height:100%; 
 }
-.cardCost{
+
+.cardCost
+{
     color: aliceblue;
     background-image: url("../assets/buttons/Orange Button.png");
     background-size: cover;
@@ -62,9 +72,10 @@ body{
     left:0;
     border: 2px solid black;
 }
-.cardDescription{
+
+.cardDescription
+{
     color: aliceblue;
-    /* padding: 5px; */
     background-image: url("../assets/buttons/Blue Button.png");
     background-size: cover;
     background-repeat: no-repeat;
@@ -75,15 +86,17 @@ body{
     
     
 }
-.enemyImage{
+
+.enemyImage
+{
     background-color: black;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     width: 100%;
     height:100%;
-    
 }
+
 .enemyCurrentHealth, .enemyCurrentShield
 {
     background-image: url("../assets/buttons/Red Button.png");
@@ -91,11 +104,11 @@ body{
     background-repeat: no-repeat;
     background-position:top center;
     height: 60px;
-    width: 100%; 
-    
-    height: 63px; 
+    width: 100%;  
 }
-.enemyMaxHealth , .enemyMaxShield{
+
+.enemyMaxHealth , .enemyMaxShield
+{
     background-color: rgb(47, 10, 10);
     height: 60px;
     width: 100%;
@@ -103,11 +116,14 @@ body{
     justify-content: left;
     position: relative;
 }
-.enemyHealth, .enemyShield{
+
+.enemyHealth, .enemyShield
+{
     color: aliceblue;
     position: absolute;
     margin-left:10px;
 }
+
 .enemyBars
 {
     display:flex;
@@ -118,19 +134,24 @@ body{
     height: 60px;
     max-height: 60px;
 }
+
 .enemyBars>*
 {
     border: 2px solid black;
 
 }
+
 .enemyMaxShield
 {
- border: 2px 0 0 0;
+    border: 2px 0 0 0;
     background-color: rgb(22, 22, 22);
 }
-.enemyMaxHealth{
-border: 0 0 2px 0;  
+
+.enemyMaxHealth
+{
+    border: 0 0 2px 0;  
 }
+
 .enemyCurrentShield
 {
     background-image: url("../assets/buttons/Grey Button.png");
@@ -139,7 +160,9 @@ border: 0 0 2px 0;
     background-position:top center;
     filter: brightness(1.5);
 }
-.enemyAction{
+
+.enemyAction
+{
     color: aliceblue;
     background-image: url("../assets/buttons/Orange Button.png");
     background-size: cover;
@@ -157,7 +180,9 @@ border: 0 0 2px 0;
     align-items: center;
     padding: 5px;
 }
-.cardMid{
+
+.cardMid
+{
     box-sizing: border-box;
     position: relative;
     width: 100%;
@@ -165,18 +190,26 @@ border: 0 0 2px 0;
     height: 110px;
     overflow: hidden;
 }
-.cardId,.enemyId{
+
+.cardId,.enemyId
+{
     display: none;
 }
-#playerFooter{
+
+#playerFooter
+{
     position: relative;
 }
-#playerBars{
+
+#playerBars
+{
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
-#maxHealth{
+
+#maxHealth
+{
     background-color: rgb(90, 22, 22);
     width: 75%;
     height: 30px;
@@ -186,17 +219,23 @@ border: 0 0 2px 0;
     overflow: hidden;
     position: relative;
 }
-#currentHealth{
+
+#currentHealth
+{
     background-color: rgb(1, 70, 1);  
     width: 100%;
     height: 30px;
 }
-#health{
+
+#health
+{
     color: aliceblue;
     position: absolute;
     margin-left:10px;
 }
-#maxShield{
+
+#maxShield
+{
     background-color: rgb(22, 22, 22);
     width: 75%;
     height: 30px;
@@ -207,72 +246,90 @@ border: 0 0 2px 0;
     position: relative;
     
 }
-#currentShield{
+
+#currentShield
+{
     background-color: rgb(102, 99, 99);  
     width: 100%;
     height: 30px;
 }
-#shield{
+
+#shield
+{
     color: aliceblue;
     position: absolute;
     margin-left:10px;
 }
-.selected{
+.selected
+{
     bottom: 50px;
 }
+
 #cardsBelt
 {
  margin: 100px 0 20px 0;
 }
+
 #cardsBelt,#enemiesBelt
 {   
     height: 200px;
 }
-#battleHeader{
+
+#battleHeader
+{
     position: relative;
     height: 70px;
 }
-#quitBtn,#endQuitBtn,#endTurnDeckBtn,#playAgainBtn{
+
+#quitBtn,#endQuitBtn,#endTurnDeckBtn,#playAgainBtn
+{
     color: aliceblue;
     background-image: url("../assets/buttons/Grey Button.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
 }
-#quitBtn{
+
+#quitBtn
+{
     position: absolute;
     right: 15px;
     top: 5px;
 }
-#endTurnDeckBtn{
+
+#endTurnDeckBtn
+{
     position: absolute;
     right: 15px;
     top: 3px;
 }
-#battleTitle{
+
+#battleTitle
+{
     color:crimson;
     justify-self: center;
     margin-top: 15px;
-    
 }
-#victoryScreen>.buttonPanel> #endQuitBtn,#victoryScreen>.buttonPanel> #playAgainBtn{
 
+#victoryScreen>.buttonPanel> #endQuitBtn,#victoryScreen>.buttonPanel> #playAgainBtn
+{
     padding: 10px;
     position:initial;
-    
-   
 }
-h2{
+
+h2
+{
     color:crimson;
     justify-self: center;
     margin-top: 15px;
 }
-#victoryScreen{
+
+#endScreen
+{
     display: flex;
     flex-direction: column;
     z-index: 1;
     justify-content: center;
-    display: block;
     position: absolute;
     color: aliceblue;
     border: 5px solid black;
@@ -283,27 +340,23 @@ h2{
     height: 30%;
     max-width: 500px;
     border-radius: 15%;
-    background-image: url("../assets/Main Panel Background.png");
+    background-image: url("../assets/backgrounds/Main Panel Background.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position:top center;
     padding: 50px;
-    
 }
-.buttonPanel{
+
+.buttonPanel
+{
     margin-top: 50px;
     position: relative;
     display: flex;
     justify-content: center;
     gap: 30px;
-    
 }
-.hidden{
- display: none !important;
+
+.hidden
+{
+    display: none !important;
 }
-    /* @media (min-height:70){
-#battleField{
-    height: 10vh;
-    
-}
-} */
