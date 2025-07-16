@@ -56,6 +56,8 @@ function init(){
   player.maxHealth=40
   player.maxHealth-=10*difficulty
   player.health=player.maxHealth
+  player.maxShield=0
+  player.shield=0
   gameState="battle"
   removeAllEnemies()
   updatePlayerBars()
