@@ -265,7 +265,7 @@ function createPlayerdeck() {
    
 
     if (!cardIdx) {
-      console.error("Selected card is undefined", index, player.unusedDeck);
+      window.alert(" Selected card is undefined", index, player.unusedDeck);
       continue;
     }
     
@@ -290,7 +290,7 @@ function drawCards(drawCount)
     let unusedDeckLength = player.unusedDeck.length;
 
     if (unusedDeckLength === 0) {
-      console.error("No cards left to draw!");
+      window.alert("No cards left to draw!");
       break;
     }
 
@@ -299,7 +299,7 @@ function drawCards(drawCount)
    
 
     if (!cardIdx) {
-      console.error("Selected card is undefined", index, player.unusedDeck);
+      window.alert("Selected card is undefined", index, player.unusedDeck);
       continue;
     }
     

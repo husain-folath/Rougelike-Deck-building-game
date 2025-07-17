@@ -2,6 +2,9 @@
 ## 🕹️ Game Name: *[The Crimson Gambit]*
 # Roguelike Deck Builder Game
 
+# made By:
+# Husain Folath
+# [linkedin](https://www.linkedin.com/in/hussain-folath-48b128197/).
 
 
 A **roguelike deck-building game** where players sacrifice **health to play powerful cards**. The game is inspired by titles like *Slay the Spire*, but introduces a risk-reward system where managing your HP is as important as managing your deck.
@@ -134,8 +137,11 @@ let Enemy =  {
 
 ## 🙏 Attributions
 
-- Not applicable yet. 
+Game concept and code by: Husain Folath
 
+Special thanks to **[Abdulla Alshaikh](https://github.com/alshaikh-exe/)** and **[Mohamed Ali](https://github.com/mohammedali320)** for their design input
+
+Debugging and styling help: [ChatGPT](https://chatgpt.com/) 
 
 ---
 
